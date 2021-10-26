@@ -1,0 +1,27 @@
+{
+  "name": "restinbackend",
+  "version": "1.0.0",
+  "description": "backend server for project",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NwlSmith/RestInBankruptcy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NwlSmith/RestInBankruptcy/issues"
+  },
+  "homepage": "https://github.com/NwlSmith/RestInBankruptcy#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
