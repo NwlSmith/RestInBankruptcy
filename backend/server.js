@@ -1,15 +1,20 @@
 import express from 'express'
 import cors from 'cors'
 
-const app = express()
-const port = 8080
+// routes
+import helloRouter from './routes/helloworldRouter.js'
 
-const helloRoutes = require('./routes/helloworldRouter').default
+const app = express()
+
+// port to listen on
+const port = 8080
 
 app.use(cors())
 
-app.use('/', helloRoutes)
+// using routes
+app.use('/', helloRouter)
 
+// listening on
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
