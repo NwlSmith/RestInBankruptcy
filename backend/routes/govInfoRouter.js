@@ -14,7 +14,7 @@ govInfoRouter.get('/bankruptcies', async (req, res) => {
             res.send(response.data.packages)
         })
     } catch (e) {
-        res.send(e.data.error)
+        res.status(e.status).send(e.data)
     }
     
 })
