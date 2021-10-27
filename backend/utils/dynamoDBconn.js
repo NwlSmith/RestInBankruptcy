@@ -1,4 +1,4 @@
-import DynamoDBClient from "@aws-sdk/client-dynamodb"
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
 
 const re = "us-east-2"
 

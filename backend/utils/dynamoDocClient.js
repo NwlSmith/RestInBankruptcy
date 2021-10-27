@@ -1,5 +1,5 @@
 import { DynamoDBDocumentClient} from "@aws-sdk/lib-dynamodb";
-import { dynaDB } from "./dynamoDBconn";
+import { dynaDB } from "./dynamoDBconn.js";
 
 const re = "us-east-2";
 
