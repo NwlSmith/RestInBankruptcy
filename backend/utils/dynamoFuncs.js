@@ -1,5 +1,5 @@
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
-import { dynaDocClient } from "../utils/dynamoDocClient.js"
+import { dynaDocClient } from "./dynamoDocClient.js"
 
 
 const putDoc = async (tableName, doc) => {
@@ -9,11 +9,10 @@ const putDoc = async (tableName, doc) => {
       };
     try {
         const data = await dynaDocClient.send(new PutCommand(params));
-        console.log("Success - item added or updated", data);
         return data;
     } catch (err) {
-        console.log("Error", err);
+        throw err;
     }
 };
 
-export default putDoc
+export { putDoc }
