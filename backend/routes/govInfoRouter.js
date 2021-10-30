@@ -25,7 +25,7 @@ govInfoRouter.get('/bankruptcies/:earliestdate?/:latestdate?', async (req, res) 
 })
 
 // optional query param "index" to select single array index
-govInfoRouter.get("/dummydata", async (req, res) => {
+govInfoRouter.get('/dummydata', async (req, res) => {
     if(req.query.index) {
         res.send(dummydata.Items[req.query.index])
     } else {
