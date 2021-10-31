@@ -106,15 +106,15 @@ dbRouter.get('/docs/:tablename/:keyName/:keyVal', async (req, res) => {
 })
 
 // get a single document by key and sortkey (if table has one)
-dbRouter.get('/doc/:tableName/:keyName/:keyVal/:sortName?/:sortVal?', async (req, res) => {
+dbRouter.get('/doc/:tablename/:keyName/:keyVal/:sortName?/:sortVal?', async (req, res) => {
     let keyobj = {}
     keyobj[req.params.keyName] = req.params.keyVal
     if(req.params.sortVal && req.params.sortName) {
         keyobj[req.params.sortName] = req.params.sortVal
     }
     try {
-        let response = await getDoc(req.params.tableName, keyobj)
-        res.status(response.$metadata.httpStatusCode).send(response)
+        let response = await getDoc(req.params.tablename, keyobj)
+        res.status(response.$metadata.httpStatusCode).send(response.Item)
     } catch (e) {
         res.status(e.$metadata.httpStatusCode).send(e.message)
     }
