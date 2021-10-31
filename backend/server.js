@@ -4,7 +4,6 @@ import cors from 'cors'
 
 
 // routes
-import helloRouter from './routes/helloworldRouter.js'
 import govInfoRouter from './routes/govInfoRouter.js'
 import dbRouter from "./routes/dbRouter.js"
 
@@ -15,9 +14,9 @@ const port = 8080
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static("home"))
 
 // using routes
-app.use('/', helloRouter)
 app.use('/govinfo', govInfoRouter)
 app.use('/dynamoDB', dbRouter)
 

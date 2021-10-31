@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script>
+        window.onload = () => {
+            document.getElementById("urlText").innerHTML = window.location.href.replace(location.hash, "");
+        }
+    </script>
+    <link rel="stylesheet" href="assets/index.css">
+    <link rel="shortcut icon" href="assets/kisspng-headstone-grave-cemetery-rest-in-peace-tomb-cemetery-5a7adbb2527a12.1677987415180010743378.png">
+    <title>Rest In Backend</title>
+  </head>
+  <body>
+    <header>
+        <h1>Contents</h1>
+        <ul>
+            <li>
+                <a href="#govinfoHeader">Gov Info</a>
+                <ol>
+                    <li><a href="#govinfoGET">GET</a></li>
+                </ol>
+            </li>
+            <li>
+                <a href="#databaseHeader">DynamoDB API</a>
+                <ol>
+                    <li><a href="#databaseGET">GET</a></li>
+                    <li><a href="#databasePOST">POST</a></li>
+                    <li><a href="#databasePUT">PUT</a></li>
+                    <li><a href="#databaseDELETE">DELETE</a></li>
+                </ol>
+            </li>
+        </ul>
+        <p>Root url for requests will be: <span id="urlText"> </span></p>
+    </header>
+    <main>
+        <section>
+            <div>
+                <h1 id="govinfoHeader">Govinfo endpoints</h1>
+                <p>List of endpoints for govinfo related api calls. These calls are will all have relative url of <strong>/govinfo</strong></p>
+            </div>
+            <div>
+                <h2 id="govinfoGET">GET requests</h2>
+                <p>
+                    Currently there are 2, which will most likely be deprecated in the future.
+                    <section>
+                        <h4 class="endpointText">/bankruptcies/{earliestdate=optional}/{latestdate=optional}?{offset=optional}&{pageSize=optional}</h4>
+                        <h5>URL params</h5>
+                        earliestdate (default="2020-01-01"): denotes the earliest date that a filing was last modified that you want to fetch filings for in YYYY-MM-DD format.
+                        <br>
+                        latestdate (default=null): denotes the latest date that a filing was last modified that you want to fetch filings for in YYYY-MM-DD format
+                        <h5>Query params</h5>
+                        offset (default=0): denotes the number of results to skip when returning, limit is 9900
+                        <br>
+                        pageSize (default=100): denotes how many results to return, limit is 100
+                        <br>
+                        <p>
+                            Example:
+                            <span class="exampleEndpointText">bankruptcies/2020-10-01/2021-03-01?offset=200&pageSize=30</span>
+                        </p>
+                        Will return bankruptcy filings from the govinfo api. These filings are returned in descending order, so modifying earliestdate will have no immediate effect
+                    </section>
+                    <section>
+                        <h4 class="endpointText">/dummydata</h4>
+                        <br><br>
+                        There are no parameters for this endpoint, and will return the local DummyData.json as response.
+                    </section>
+                </p>
+            </div>
+        </section>
+        <section>
+            <div>
+                <h1 id="databaseHeader">DynamoDB endpoints</h1>
+                <p>List of endpoints for performing DynamoDB operations. These calls are will all have relative url of <strong>/dynamoDB</strong></p>
+            </div>
+            <div>
+                <h2 id="databaseGET">GET requests</h2>
+                <p>
+                    There are currently 2.
+                    <section>
+                        <h4 class="endpointText">/docs/{tablename=required}/{keyName=required}/{keyVal=required}?{filterName=optional}&{filterValue=optional}</h4>
+                        <h5>URL params</h5>
+                        tablename: denotes the name of the DynamoDB table that is requested
+                        <br>
+                        keyName: denotes the name of the primary key of the item(s) being requested
+                        <br>
+                        keyVal: denotes value of the primary key of the item(s) being requested
+                        <h5>Query params</h5>
+                        filterName (default=null): denotes the name of the attribute you want to filter by
+                        <br>
+                        filterValue (default=null): denotes the value of the attribute you want to filter by
+                        <p>
+                            Example:
+                            <span class="exampleEndpointText">/docs/GravestoneOfferings/packageId/USCOURTS-deb-1_07-bk-10416?filterName=flowers&filterValue=10</span>
+                        </p>
+                        Will return an array of objects found in the database with matching criteria
+                    </section>
+                    <section>
+                        <h4 class="endpointText">/doc/{tablename=required}/{keyName=required}/{keyVal=required}/{sortName=optional}/{sortVal=optional}</h4>
+                        <h5>URL params</h5>
+                        tablename: denotes the name of the DynamoDB table that is requested
+                        <br>
+                        keyName: denotes the name of the primary key of the item being requested
+                        <br>
+                        keyVal: denotes value of the primary key of the item being requested
+                        <br>
+                        sortName (default=null): denotes the sort key name for the item requested, must use if table has sort key
+                        <br>
+                        sortVal (default=null): denotes the sort key value for the item requested, must use if table has sort key
+                        <p>
+                            Example:
+                            <span class="exampleEndpointText">/doc/RestInDatabase/courtState/New York/packageId/USCOURTS-nysb-1_18-bk-13359</span>
+                            <br>
+                            Note: Some values may need spaces so either encode the request url, or it can be represented with "%20"
+                        </p>
+                        Will return a single matching document from the specified table
+                    </section>
+                </p>
+            </div>
+            <div>
+                <h2 id="databasePOST">POST requests</h2>
+                <p></p>
+            </div>
+            <div>
+                <h2 id="databasePUT">PUT requests</h2>
+                <p></p>
+            </div>
+            <div>
+                <h2 id="databaseDELETE">DELETE requests</h2>
+                <p></p>
+            </div>
+        </section>
+    </main>
+  </body>
+</html>
