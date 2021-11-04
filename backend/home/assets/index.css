@@ -52,13 +52,13 @@ h5 {
     color: #234099;
 }
 .endpointText {
-    box-shadow: -10px 5px 5px lightslategray;
+    box-shadow: -5px 5px 5px lightslategray;
     color: deepskyblue;
     outline: 2px dashed lightseagreen;
     display: inline;
 }
 .exampleEndpointText {
-    box-shadow: -10px 5px 5px darkslategray;
+    box-shadow: -5px 5px 5px darkslategray;
     color: lightskyblue;
     outline: 2px dashed lightseagreen;
     display: inline;

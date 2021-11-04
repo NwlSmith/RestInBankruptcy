@@ -242,24 +242,26 @@
             </section>
             <section>
                 <h2 class="sectionHeader" id="databaseDELETE">DELETE requests</h2>
-                <p>
-                    <section>
-                        <h4 class="endpointText">/doc-attribute/{tablename=required}/{keyName=required}/{keyVal=required}/{fieldName=required}</h4>
-                        <h5>URL params</h5>
-                        tablename: denotes the name of the DynamoDB table that is requested
-                        <br>
-                        keyName: denotes the name of the primary key of the item(s) being requested
-                        <br>
-                        keyVal: denotes value of the primary key of the item(s) being requested
-                        <br>
-                        fieldName: denotes the name of the attribute to be deleted
-                        <br><br>
-                        Example:
-                            <span class="exampleEndpointText">/doc-attribute/GravestoneOfferings/packageId/USCOURTS-deb-1_07-bk-10416/flowers</span>
-                        </p>
-                        Will delete the attribute specified from the table in the database 
-                    </section>
-                </p>
+                <div>
+                    <p>
+                        <section>
+                            <h4 class="endpointText">/doc-attribute/{tablename=required}/{keyName=required}/{keyVal=required}/{fieldName=required}</h4>
+                            <h5>URL params</h5>
+                            tablename: denotes the name of the DynamoDB table that is requested
+                            <br>
+                            keyName: denotes the name of the primary key of the item(s) being requested
+                            <br>
+                            keyVal: denotes value of the primary key of the item(s) being requested
+                            <br>
+                            fieldName: denotes the name of the attribute to be deleted
+                            <br><br>
+                            Example:
+                                <span class="exampleEndpointText">/doc-attribute/GravestoneOfferings/packageId/USCOURTS-deb-1_07-bk-10416/flowers</span>
+                            </p>
+                            Will delete the attribute specified from the table in the database 
+                        </section>
+                    </p>
+                </div>
             </section>
             <section>
                 <h2 class="sectionHeader" id="databasePUT">PUT requests</h2>
