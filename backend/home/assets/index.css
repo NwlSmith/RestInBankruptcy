@@ -1,62 +1,76 @@
 html {
     scroll-behavior: smooth;
 }
+
 body {
     background-color: rgb(26, 29, 29);
     color: lightgray;
     overflow: overlay;
     padding: 10px;
 }
+
 div section {
     margin-top: 50px;
     padding: 15px;
 }
+
 section h1 {
     font-size: 2em;
 }
+
 h1.sectionHeader {
     background-color: rgb(26, 29, 29);
     position: sticky;
     top: 0;
     z-index: 1;
 }
+
 h2.sectionHeader {
     background-color: rgb(26, 29, 29);
     position: sticky;
     top: 46.4px;
 }
+
 *::-webkit-scrollbar {
     display: block;
     width: 16px;
 }
+
 *::-webkit-scrollbar-button {
     display: none;
 }
+
 *::-webkit-scrollbar-track {
     background-color: #00000000;
 }
+
 *::-webkit-scrollbar-track-piece {
     background-color: #00000000;
 }
+
 *::-webkit-scrollbar-thumb {
     background-color: #c0c0c0e8;
     border: 1px solid #ffffff40;
     border-radius: 24px;
 }
+
 a:link {
     color: slateblue;
     text-decoration: none;
 }
+
 h5 {
     margin: 15px;
     color: #234099;
 }
+
 .endpointText {
     box-shadow: -5px 5px 5px lightslategray;
     color: deepskyblue;
     outline: 2px dashed lightseagreen;
     display: inline;
 }
+
 .exampleEndpointText {
     box-shadow: -5px 5px 5px darkslategray;
     color: lightskyblue;
