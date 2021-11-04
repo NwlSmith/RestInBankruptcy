@@ -35,100 +35,271 @@
     </header>
     <main>
         <section>
-            <div>
-                <h1 id="govinfoHeader">Govinfo endpoints</h1>
-                <p>List of endpoints for govinfo related api calls. These calls will all have relative url of <strong>/govinfo</strong></p>
-            </div>
-            <div>
-                <h2 id="govinfoGET">GET requests</h2>
-                <p>
-                    Currently there are 2, which will most likely be deprecated in the future.
-                    <section>
-                        <h4 class="endpointText">/bankruptcies/{earliestdate=optional}/{latestdate=optional}?{offset=optional}&{pageSize=optional}</h4>
-                        <h5>URL params</h5>
-                        earliestdate (default="2020-01-01"): denotes the earliest date that a filing was last modified that you want to fetch filings for in YYYY-MM-DD format.
-                        <br>
-                        latestdate (default=null): denotes the latest date that a filing was last modified that you want to fetch filings for in YYYY-MM-DD format
-                        <h5>Query params</h5>
-                        offset (default=0): denotes the number of results to skip when returning, limit is 9900
-                        <br>
-                        pageSize (default=100): denotes how many results to return, limit is 100
-                        <br>
-                        <p>
-                            Example:
-                            <span class="exampleEndpointText">bankruptcies/2020-10-01/2021-03-01?offset=200&pageSize=30</span>
-                        </p>
-                        Will return bankruptcy filings from the govinfo api. These filings are returned in descending order, so modifying earliestdate will have no immediate effect
-                    </section>
-                    <section>
-                        <h4 class="endpointText">/dummydata</h4>
-                        <br><br>
-                        There are no parameters for this endpoint, and will return the local DummyData.json as response.
-                    </section>
-                </p>
-            </div>
+            <h1 class="sectionHeader" id="govinfoHeader">Govinfo endpoints</h1>
+            <p>List of endpoints for govinfo related api calls. These calls will all have relative url of <strong>/govinfo</strong></p>
+            <section>
+                <h2 class="sectionHeader" id="govinfoGET">GET requests</h2>
+                <div>
+                    <p>
+                        Currently there are 2, which will most likely be deprecated in the future.
+                        <section>
+                            <h4 class="endpointText">/bankruptcies/{earliestdate=optional}/{latestdate=optional}?{offset=optional}&{pageSize=optional}</h4>
+                            <h5>URL params</h5>
+                            earliestdate (default="2020-01-01"): denotes the earliest date that a filing was last modified that you want to fetch filings for in YYYY-MM-DD format.
+                            <br>
+                            latestdate (default=null): denotes the latest date that a filing was last modified that you want to fetch filings for in YYYY-MM-DD format
+                            <h5>Query params</h5>
+                            offset (default=0): denotes the number of results to skip when returning, limit is 9900
+                            <br>
+                            pageSize (default=100): denotes how many results to return, limit is 100
+                            <br>
+                            <p>
+                                Example:
+                                <span class="exampleEndpointText">bankruptcies/2020-10-01/2021-03-01?offset=200&pageSize=30</span>
+                            </p>
+                            Will return bankruptcy filings from the govinfo api. These filings are returned in descending order, so modifying earliestdate will have no immediate effect
+                        </section>
+                        <section>
+                            <h4 class="endpointText">/dummydata</h4>
+                            <br><br>
+                            There are no parameters for this endpoint, and will return the local DummyData.json as response.
+                        </section>
+                    </p>
+                </div>
+            </section>
         </section>
         <section>
-            <div>
-                <h1 id="databaseHeader">DynamoDB endpoints</h1>
-                <p>List of endpoints for performing DynamoDB operations. These calls are will all have relative url of <strong>/dynamoDB</strong></p>
-            </div>
-            <div>
-                <h2 id="databaseGET">GET requests</h2>
+            <h1 class="sectionHeader" id="databaseHeader">DynamoDB endpoints</h1>
+            <p>List of endpoints for performing DynamoDB operations. These calls are will all have relative url of <strong>/dynamoDB</strong></p>
+            <section>
+                <h2 class="sectionHeader" id="databaseGET">GET requests</h2>
+                <div>
+                    <p>
+                        There are currently 2.
+                        <section>
+                            <h4 class="endpointText">/docs/{tablename=required}/{keyName=required}/{keyVal=required}?{filterName=optional}&{filterValue=optional}</h4>
+                            <h5>URL params</h5>
+                            tablename: denotes the name of the DynamoDB table that is requested
+                            <br>
+                            keyName: denotes the name of the primary key of the item(s) being requested
+                            <br>
+                            keyVal: denotes value of the primary key of the item(s) being requested
+                            <h5>Query params</h5>
+                            filterName (default=null): denotes the name of the attribute you want to filter by
+                            <br>
+                            filterValue (default=null): denotes the value of the attribute you want to filter by
+                            <p>
+                                Example:
+                                <span class="exampleEndpointText">/docs/GravestoneOfferings/packageId/USCOURTS-deb-1_07-bk-10416?filterName=flowers&filterValue=10</span>
+                            </p>
+                            Will return an array of objects found in the database with matching criteria
+                        </section>
+                        <section>
+                            <h4 class="endpointText">/doc/{tablename=required}/{keyName=required}/{keyVal=required}/{sortName=optional}/{sortVal=optional}</h4>
+                            <h5>URL params</h5>
+                            tablename: denotes the name of the DynamoDB table that is requested
+                            <br>
+                            keyName: denotes the name of the primary key of the item being requested
+                            <br>
+                            keyVal: denotes value of the primary key of the item being requested
+                            <br>
+                            sortName (default=null): denotes the sort key name for the item requested, must use if table has sort key
+                            <br>
+                            sortVal (default=null): denotes the sort key value for the item requested, must use if table has sort key
+                            <p>
+                                Example:
+                                <span class="exampleEndpointText">/doc/RestInDatabase/courtState/New York/packageId/USCOURTS-nysb-1_18-bk-13359</span>
+                                <br>
+                                Note: Some values may need spaces so either encode the request url, or it can be represented with "%20"
+                            </p>
+                            Will return a single matching document from the specified table
+                        </section>
+                    </p>
+                </div>
+            </section>
+            <section>
+                <h2 class="sectionHeader" id="databasePOST">POST requests</h2>
                 <p>
-                    There are currently 2.
+                    There are currently --- post endpoints.
+
                     <section>
-                        <h4 class="endpointText">/docs/{tablename=required}/{keyName=required}/{keyVal=required}?{filterName=optional}&{filterValue=optional}</h4>
+                        <h4 class="endpointText">/doc</h4>
+                        <br><br>
+                        Will insert an object into the table <code> tableName</code>
+                        <br><br>
+                        Object format:
+                            <pre><code>
+{
+    "tableName": string             // table name
+    "doc":{                         // package info
+                                    // insert appropriate information 
+                                    // (see specific examples below)
+    }
+}
+                            </pre></code>
+                        <!-- <p>
+                            Example:
+                            <span class="exampleEndpointText">/doc</span>
+                            <br><br>
+                            Object posted:
+                            <pre><code>
+{
+    "tableName": "GravestoneOfferings"
+    "doc":{
+        "comments": {
+            "User1": "hi, im user1"
+        },
+        "packageId": "USCOURTS-deb-1_07-bk-10416",
+        "flowers": 1
+    }
+}
+                            </pre></code>
+                        </p> -->
+                    </section>
+
+                    <section>
+                        <h4 class="endpointText">/doc/gravestone</h4>
+                        <br><br>
+                        Will insert a JSON object into the GravestoneOfferings table
+                        <br><br>
+                        Object format:
+                            <pre><code>
+{
+    "comments": {                   // list of comments
+            "User1": string,
+            "User2": string         // User1's and User2's comments 
+        },
+        "packageId": string         // the specific associated bankruptcy case's unique packageId  
+        "flowers": int              // number of flowers 
+    }
+}
+                            </pre></code>
+                        <p>
+                            Example:
+                            <span class="exampleEndpointText">/doc/gravestone</span>
+                            <br><br>
+                            Object posted:
+                            <pre><code>
+{
+    "comments": {
+        "User1": "hi, im user1"
+    },
+    "packageId": "USCOURTS-deb-1_07-bk-10416",
+    "flowers": 1
+}
+                            </pre></code>
+                        </p>
+
+                    </section>
+
+                    <section>
+                        <h4 class="endpointText">/doc/bankruptcy</h4>
+                        <br><br>
+                        Will insert an object into the RestInDatabase table
+                        <p>
+                            Example:
+                            <span class="exampleEndpointText">/doc/gravestone</span>
+                            <br><br>
+                            Object posted:
+                            <pre><code>
+{
+    "governmentAuthor1": "United States Bankruptcy Court Southern District of New York",
+    "documentType": "USCOURTS",
+    "courtState": "New York",
+    "dateIssued": "2021-10-15",
+    "lastModified": "2021-10-18T07:52:12Z",
+    "caseNumber": "1:18-bk-13359",
+    "courtCircuit": "2nd",
+    "courtType": "Bankruptcy",
+    "courtCode": "nysb",
+    "packageId": "USCOURTS-nysb-1_18-bk-13359",
+    "suDocClassNumber": "JU 14.15",
+    "detailsLink": "https://www.govinfo.gov/app/details/USCOURTS-nysb-1_18-bk-13359",
+    "parties": [
+        {
+            "lastName": "Miami Metals I, Inc.",
+            "fullName": "Miami Metals I, Inc.",
+            "role": "Debtor"
+        },
+        {
+            "lastName": "United States Trustee",
+            "fullName": "United States Trustee",
+            "role": "U.S. Trustee"
+        },
+        {
+            "lastName": "ICBC Standard Bank",
+            "fullName": "ICBC Standard Bank",
+            "role": "Creditor"
+        }
+    ],
+    "caseOffice": "Manhattan",
+    "title": "Miami Metals I, Inc., et al."
+}
+                            </pre></code>
+                        </p>
+                    </section>
+                </p>
+            </section>
+            <section>
+                <h2 class="sectionHeader" id="databaseDELETE">DELETE requests</h2>
+                <p>
+                    <section>
+                        <h4 class="endpointText">/doc-attribute/{tablename=required}/{keyName=required}/{keyVal=required}/{fieldName=required}</h4>
                         <h5>URL params</h5>
                         tablename: denotes the name of the DynamoDB table that is requested
                         <br>
                         keyName: denotes the name of the primary key of the item(s) being requested
                         <br>
                         keyVal: denotes value of the primary key of the item(s) being requested
-                        <h5>Query params</h5>
-                        filterName (default=null): denotes the name of the attribute you want to filter by
                         <br>
-                        filterValue (default=null): denotes the value of the attribute you want to filter by
-                        <p>
-                            Example:
-                            <span class="exampleEndpointText">/docs/GravestoneOfferings/packageId/USCOURTS-deb-1_07-bk-10416?filterName=flowers&filterValue=10</span>
+                        fieldName: denotes the name of the attribute to be deleted
+                        <br><br>
+                        Example:
+                            <span class="exampleEndpointText">/doc-attribute/GravestoneOfferings/packageId/USCOURTS-deb-1_07-bk-10416/flowers</span>
                         </p>
-                        Will return an array of objects found in the database with matching criteria
-                    </section>
-                    <section>
-                        <h4 class="endpointText">/doc/{tablename=required}/{keyName=required}/{keyVal=required}/{sortName=optional}/{sortVal=optional}</h4>
-                        <h5>URL params</h5>
-                        tablename: denotes the name of the DynamoDB table that is requested
-                        <br>
-                        keyName: denotes the name of the primary key of the item being requested
-                        <br>
-                        keyVal: denotes value of the primary key of the item being requested
-                        <br>
-                        sortName (default=null): denotes the sort key name for the item requested, must use if table has sort key
-                        <br>
-                        sortVal (default=null): denotes the sort key value for the item requested, must use if table has sort key
-                        <p>
-                            Example:
-                            <span class="exampleEndpointText">/doc/RestInDatabase/courtState/New York/packageId/USCOURTS-nysb-1_18-bk-13359</span>
-                            <br>
-                            Note: Some values may need spaces so either encode the request url, or it can be represented with "%20"
-                        </p>
-                        Will return a single matching document from the specified table
+                        Will delete the attribute specified from the table in the database 
                     </section>
                 </p>
-            </div>
-            <div>
-                <h2 id="databasePOST">POST requests</h2>
-                <p></p>
-            </div>
-            <div>
-                <h2 id="databasePUT">PUT requests</h2>
-                <p></p>
-            </div>
-            <div>
-                <h2 id="databaseDELETE">DELETE requests</h2>
-                <p></p>
-            </div>
+            </section>
+            <section>
+                <h2 class="sectionHeader" id="databasePUT">PUT requests</h2>
+                <p>
+                    There is currently 1.
+                    <section>
+                        <h4 class="endpointText">/doc/{tablename=required}</h4>
+                        <br><br>
+                        Will update/insert an object into the stated <code> tablename </code>
+                        <h5>URL params</h5>
+                        tablename: denotes the name of the DynamoDB table that is requested
+                        <br><br>
+                        Object format:
+                            <pre><code>
+{
+    "keyObj":{
+        "packageId": string         //appropriate key-value pair for packageId
+    },
+    "fieldName": string,            //field name to be updated
+    "fieldValue": int               //field value to be updated
+}
+                            </pre></code>
+                        <p>
+                            Example:
+                            <span class="exampleEndpointText">/doc/gravestone</span>
+                            <br><br>
+                            Object updated:
+                            <pre><code>
+{
+    "keyObj":{
+        "packageId": "USCOURTS-deb-1_07-bk-10416"
+    },
+    "fieldName": "flowers",
+    "fieldValue": "1"
+}
+                            </pre></code>
+                        </p>
+                    </section>
+                </p>
+            </section> 
         </section>
     </main>
   </body>
