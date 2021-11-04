@@ -119,126 +119,124 @@
             </section>
             <section>
                 <h2 class="sectionHeader" id="databasePOST">POST requests</h2>
-                <p>
-                    There are currently --- post endpoints.
-
-                    <section>
-                        <h4 class="endpointText">/doc</h4>
-                        <br><br>
-                        Will insert an object into the table <code> tableName</code>
-                        <br><br>
-                        Object format:
-                            <pre><code>
-{
-    "tableName": string             // table name
-    "doc":{                         // package info
-                                    // insert appropriate information 
-                                    // (see specific examples below)
-    }
-}
-                            </pre></code>
-                        <!-- <p>
-                            Example:
-                            <span class="exampleEndpointText">/doc</span>
+                <div>
+                    <p>
+                        There are currently --- post endpoints.
+                        <section>
+                            <h4 class="endpointText">/doc</h4>
                             <br><br>
-                            Object posted:
-                            <pre><code>
-{
-    "tableName": "GravestoneOfferings"
-    "doc":{
-        "comments": {
-            "User1": "hi, im user1"
-        },
-        "packageId": "USCOURTS-deb-1_07-bk-10416",
-        "flowers": 1
-    }
-}
-                            </pre></code>
-                        </p> -->
-                    </section>
-
-                    <section>
-                        <h4 class="endpointText">/doc/gravestone</h4>
-                        <br><br>
-                        Will insert a JSON object into the GravestoneOfferings table
-                        <br><br>
-                        Object format:
-                            <pre><code>
-{
-    "comments": {                   // list of comments
-            "User1": string,
-            "User2": string         // User1's and User2's comments 
-        },
-        "packageId": string         // the specific associated bankruptcy case's unique packageId  
-        "flowers": int              // number of flowers 
-    }
-}
-                            </pre></code>
-                        <p>
-                            Example:
-                            <span class="exampleEndpointText">/doc/gravestone</span>
+                            Will insert an object into the table <code> tableName</code>
                             <br><br>
-                            Object posted:
-                            <pre><code>
-{
-    "comments": {
-        "User1": "hi, im user1"
-    },
-    "packageId": "USCOURTS-deb-1_07-bk-10416",
-    "flowers": 1
-}
-                            </pre></code>
-                        </p>
-
-                    </section>
-
-                    <section>
-                        <h4 class="endpointText">/doc/bankruptcy</h4>
-                        <br><br>
-                        Will insert an object into the RestInDatabase table
-                        <p>
-                            Example:
-                            <span class="exampleEndpointText">/doc/gravestone</span>
+                            Object format:
+                                <pre><code>
+                    {
+                        "tableName": string             // table name
+                        "doc":{                         // package info
+                                        // insert appropriate information
+                                        // (see specific examples below)
+                        }
+                    }
+                                </pre></code>
+                            <!-- <p>
+                                Example:
+                                <span class="exampleEndpointText">/doc</span>
+                                <br><br>
+                                Object posted:
+                                <pre><code>
+                    {
+                        "tableName": "GravestoneOfferings"
+                        "doc":{
+                            "comments": {
+                                "User1": "hi, im user1"
+                            },
+                            "packageId": "USCOURTS-deb-1_07-bk-10416",
+                            "flowers": 1
+                        }
+                    }
+                                </pre></code>
+                            </p> -->
+                        </section>
+                        <section>
+                            <h4 class="endpointText">/doc/gravestone</h4>
                             <br><br>
-                            Object posted:
-                            <pre><code>
-{
-    "governmentAuthor1": "United States Bankruptcy Court Southern District of New York",
-    "documentType": "USCOURTS",
-    "courtState": "New York",
-    "dateIssued": "2021-10-15",
-    "lastModified": "2021-10-18T07:52:12Z",
-    "caseNumber": "1:18-bk-13359",
-    "courtCircuit": "2nd",
-    "courtType": "Bankruptcy",
-    "courtCode": "nysb",
-    "packageId": "USCOURTS-nysb-1_18-bk-13359",
-    "suDocClassNumber": "JU 14.15",
-    "detailsLink": "https://www.govinfo.gov/app/details/USCOURTS-nysb-1_18-bk-13359",
-    "parties": [
-        {
-            "lastName": "Miami Metals I, Inc.",
-            "fullName": "Miami Metals I, Inc.",
-            "role": "Debtor"
-        },
-        {
-            "lastName": "United States Trustee",
-            "fullName": "United States Trustee",
-            "role": "U.S. Trustee"
-        },
-        {
-            "lastName": "ICBC Standard Bank",
-            "fullName": "ICBC Standard Bank",
-            "role": "Creditor"
-        }
-    ],
-    "caseOffice": "Manhattan",
-    "title": "Miami Metals I, Inc., et al."
-}
-                            </pre></code>
-                        </p>
-                    </section>
-                </p>
+                            Will insert a JSON object into the GravestoneOfferings table
+                            <br><br>
+                            Object format:
+                                <pre><code>
+                    {
+                        "comments": {                   // list of comments
+                                "User1": string,
+                                "User2": string         // User1's and User2's comments 
+                            },
+                            "packageId": string         // the specific associated bankruptcy case's unique packageId  
+                            "flowers": int              // number of flowers 
+                        }
+                    }
+                                </pre></code>
+                            <p>
+                                Example:
+                                <span class="exampleEndpointText">/doc/gravestone</span>
+                                <br><br>
+                                Object posted:
+                                <pre><code>
+                    {
+                        "comments": {
+                            "User1": "hi, im user1"
+                        },
+                        "packageId": "USCOURTS-deb-1_07-bk-10416",
+                        "flowers": 1
+                    }
+                                </pre></code>
+                            </p>
+                        </section>
+                        <section>
+                            <h4 class="endpointText">/doc/bankruptcy</h4>
+                            <br><br>
+                            Will insert an object into the RestInDatabase table
+                            <p>
+                                Example:
+                                <span class="exampleEndpointText">/doc/gravestone</span>
+                                <br><br>
+                                Object posted:
+                                <pre><code>
+                    {
+                        "governmentAuthor1": "United States Bankruptcy Court Southern District of New York",
+                        "documentType": "USCOURTS",
+                        "courtState": "New York",
+                        "dateIssued": "2021-10-15",
+                        "lastModified": "2021-10-18T07:52:12Z",
+                        "caseNumber": "1:18-bk-13359",
+                        "courtCircuit": "2nd",
+                        "courtType": "Bankruptcy",
+                        "courtCode": "nysb",
+                        "packageId": "USCOURTS-nysb-1_18-bk-13359",
+                        "suDocClassNumber": "JU 14.15",
+                        "detailsLink": "https://www.govinfo.gov/app/details/USCOURTS-nysb-1_18-bk-13359",
+                        "parties": [
+                            {
+                                "lastName": "Miami Metals I, Inc.",
+                                "fullName": "Miami Metals I, Inc.",
+                                "role": "Debtor"
+                            },
+                            {
+                                "lastName": "United States Trustee",
+                                "fullName": "United States Trustee",
+                                "role": "U.S. Trustee"
+                            },
+                            {
+                                "lastName": "ICBC Standard Bank",
+                                "fullName": "ICBC Standard Bank",
+                                "role": "Creditor"
+                            }
+                        ],
+                        "caseOffice": "Manhattan",
+                        "title": "Miami Metals I, Inc., et al."
+                    }
+                                </pre></code>
+                            </p>
+                        </section>
+                    </p>
+                </div>
             </section>
             <section>
                 <h2 class="sectionHeader" id="databaseDELETE">DELETE requests</h2>
@@ -265,42 +263,44 @@
             </section>
             <section>
                 <h2 class="sectionHeader" id="databasePUT">PUT requests</h2>
-                <p>
-                    There is currently 1.
-                    <section>
-                        <h4 class="endpointText">/doc/{tablename=required}</h4>
-                        <br><br>
-                        Will update/insert an object into the stated <code> tablename </code>
-                        <h5>URL params</h5>
-                        tablename: denotes the name of the DynamoDB table that is requested
-                        <br><br>
-                        Object format:
-                            <pre><code>
-{
-    "keyObj":{
-        "packageId": string         //appropriate key-value pair for packageId
-    },
-    "fieldName": string,            //field name to be updated
-    "fieldValue": int               //field value to be updated
-}
-                            </pre></code>
-                        <p>
-                            Example:
-                            <span class="exampleEndpointText">/doc/gravestone</span>
+                <div>
+                    <p>
+                        There is currently 1.
+                        <section>
+                            <h4 class="endpointText">/doc/{tablename=required}</h4>
                             <br><br>
-                            Object updated:
-                            <pre><code>
-{
-    "keyObj":{
-        "packageId": "USCOURTS-deb-1_07-bk-10416"
-    },
-    "fieldName": "flowers",
-    "fieldValue": "1"
-}
-                            </pre></code>
-                        </p>
-                    </section>
-                </p>
+                            Will update/insert an object into the stated <code> tablename </code>
+                            <h5>URL params</h5>
+                            tablename: denotes the name of the DynamoDB table that is requested
+                            <br><br>
+                            Object format:
+                                <pre><code>
+                    {
+                        "keyObj":{
+                            "packageId": string         //appropriate key-value pair for packageId
+                        },
+                        "fieldName": string,            //field name to be updated
+                        "fieldValue": int               //field value to be updated
+                    }
+                                </pre></code>
+                            <p>
+                                Example:
+                                <span class="exampleEndpointText">/doc/gravestone</span>
+                                <br><br>
+                                Object updated:
+                                <pre><code>
+                    {
+                        "keyObj":{
+                            "packageId": "USCOURTS-deb-1_07-bk-10416"
+                        },
+                        "fieldName": "flowers",
+                        "fieldValue": "1"
+                    }
+                                </pre></code>
+                            </p>
+                        </section>
+                    </p>
+                </div>
             </section> 
         </section>
     </main>
