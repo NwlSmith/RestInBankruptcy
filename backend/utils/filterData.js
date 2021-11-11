@@ -39,10 +39,13 @@ const filterPackages = async (pkgArray) => {
 
 const bolsterPackageData = async (pkgArray) => {
     for(let pkg of pkgArray) {
-        let pkgTitle = pkg.title.replace("&", "%26").replace(",", "")
         try {
-            let nyData = await axios.get(`https://data.ny.gov/resource/n9v6-gdp6.json?$where=current_entity_name like '%25${pkgTitle.toUpperCase()}%25'`)
-            let ORBData = await axios.get(`https://api.orb-intelligence.com/3/match/?api_key=${process.env.ORB_KEY}&name=${pkgTitle}&country=US&state=NY`)
+            let nyData = await axios.get(`https://data.ny.gov/resource/n9v6-gdp6.json?$where=current_entity_name like '%25${pkg.title.toUpperCase().replace("&", "%26").replace(" ", "%25").replace(","|"LLC"|"CORP"|"CO"|"INC", "")}%25'`, {
+                headers: {
+                    "X-App-Token": process.env.NY_DATA_KEY
+                }
+            })
+            let ORBData = await axios.get(`https://api.orb-intelligence.com/3/match/?api_key=${process.env.ORB_KEY}&name=${pkg.title}&country=US&state=NY`)
             if(nyData.data.length > 0) {
                 pkg["DateIncorporated"] = nyData.data[0].initial_dos_filing_date
             }
@@ -53,6 +56,7 @@ const bolsterPackageData = async (pkgArray) => {
                 pkg["employees_range"] = industryORB.data.employees_range
                 pkg["employees"] = industryORB.data.employees
                 pkg["revenue_range"] = industryORB.data.revenue_range
+                pkg["description"] = industryORB.data.description
             }
         } catch (e) {
             return e
