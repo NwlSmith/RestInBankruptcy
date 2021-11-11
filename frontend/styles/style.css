@@ -1,9 +1,6 @@
 body{
 	font-family: 'Lato', sans-serif;
-	background-image: url("../images/home.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
-	margin: 40px 80px;
+	margin: 40px 80px 150px 80px;
 	color: #EFFFFA;
 }
 
@@ -37,9 +34,8 @@ a{
 	text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.72);
 }
 
-a:hover{
+nav a:hover{
 	border-bottom: 2px solid #EFFFFA;
-	transition: 0.5s;
 }
 
 button{
@@ -76,10 +72,26 @@ h1{
 	line-height: 90px;
 }
 
+h2{
+	margin-top: 100px;
+	font-family: 'Chakra Petch', sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.72);
+}
+
+
+
+h3{
+	font-weight: regular;
+	font-size: 24px;
+	line-height: 40px;
+}
+
 p{
 	font-weight: regular;
-	font-size: 26px;
-	line-height: 40px;
+	font-size: 20px;
+	line-height: 34px;
 }
 
 
