@@ -1,27 +1,42 @@
 import express from 'express'
 import axios from 'axios'
 
-import { filterPackages } from '../utils/filterData.js'
+import { bolsterPackageData, filterPackages } from '../utils/filterData.js'
 
 import { putDoc, getDoc, updateDoc, queryDocs, deleteDocAttribute } from '../utils/dynamoFuncs.js'
 
 const dbRouter = express.Router()
+
+const apiKey = "&api_key=" + process.env.GOVAPIKEY
 
 // create a series of bankruptcies in Table = tableName
 dbRouter.post('/bankruptcies/:earliestdate?/:latestdate?', async (req, res) => {
     axios.get(`https://api.govinfo.gov/collections/USCOURTS/${req.params.earliestdate || "2020-01-01"}T12%3A00%3A00Z${req.params.latestdate ? ("/" + req.params.latestdate + "T12%3A00%3A00Z") : ""}?offset=${req.query.offset || 0}&pageSize=${req.query.pageSize || 100}&courtType=Bankruptcy` + apiKey)
     .then(response => {
         filterPackages(response.data.packages).then(filtered => {
-            let promises = []
+            let newitems = []
             for(let item of filtered) {
-                let promise = putDoc(req.body.tableName, item).catch(e => {
-                    res.status(e.$metadata.httpStatusCode).send(e.message) 
-                })
-                promises.push(promise)
+                if(item) {
+                    newitems.push(item)
+                }
             }
-            Promise.all(promises).then(() => {
-                res.status(200).send("OK")
+            bolsterPackageData(newitems).then(result => {
+                if(result.length > 0) {
+                    let promises = []
+                    for(let item of result) {
+                        let promise = putDoc(req.body.tableName, item).catch(e => {
+                            res.status(e.$metadata.httpStatusCode).send(e.message) 
+                        })
+                        promises.push(promise)
+                    }
+                    Promise.all(promises).then(() => {
+                        res.status(200).send("OK")
+                    })
+                } else {
+                    res.status(404).send("Nothing was found.")
+                }
             })
+            
         })
     }).catch(e => {
         res.status(e.response.status).send(e.response.data)
@@ -67,7 +82,6 @@ dbRouter.put('/doc/:tablename', async (req, res) => {
     } catch (e) {
         res.status(e.$metadata.httpStatusCode).send(e.message)
     }
-
 })
 
 // deleting a selected attribute field from item in specified table
