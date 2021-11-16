@@ -1,17 +1,19 @@
 html {
     scroll-behavior: smooth;
+    font-family: 'Lato', sans-serif;
 }
 
 body {
     background-color: rgb(26, 29, 29);
     color: lightgray;
     overflow: overlay;
-    padding: 10px;
+    /* padding: 10px; */
+    margin: 0;
 }
 
-div section {
-    margin-top: 50px;
-    padding: 15px;
+main section {
+    /* margin-top: 50px; */
+    margin: 3rem 2rem;
 }
 
 section h1 {
@@ -21,14 +23,16 @@ section h1 {
 h1.sectionHeader {
     background-color: rgb(26, 29, 29);
     position: sticky;
-    top: 0;
+    top: 4rem;
     z-index: 1;
+    padding: .5rem 0;
 }
 
 h2.sectionHeader {
     background-color: rgb(26, 29, 29);
     position: sticky;
-    top: 46.4px;
+    top: 6.8rem;
+    padding: .5rem 0;
 }
 
 *::-webkit-scrollbar {
@@ -55,7 +59,7 @@ h2.sectionHeader {
 }
 
 a:link {
-    color: slateblue;
+    color: #439388;
     text-decoration: none;
 }
 
@@ -79,18 +83,56 @@ h5 {
 }
 
 
-code {
-    background-color: rgb(43, 37, 82);
-    /* padding: 4px 5px 5px; */
-    /* white-space: nowrap; */
+.header{
+    width: 100%;
+    height: 4.5rem;
+    /* padding: 0 10px; */
+}
+nav{
+    /* position: relative; */
+    width: 100%;
+
 }
 
-/* pre code {
-  white-space: inherit;
+nav a:hover{ 
+	background-color: #56c0b2; 
+	color: #1B2C4A; 
+} 
+
+nav ul {
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    background-color: #1B2C4A;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 0;
+  }
+
+nav li{
+    display: inline-block;
+    padding: 0rem 1rem;
+    text-decoration: none;
+    width: 9.75rem;
+}
+
+ nav li a {
+    display: block;
+    text-align: center;
+    padding: 1.5rem 1.5rem;
+    text-decoration: none;
+    color: #56c0b2;
 } */
 
+code {
+    background-color: #1B2C4A;
+    padding: .25rem .3rem .3rem;
+}
+
 pre {
-  background-color: rgb(43, 37, 82);
+  background-color: #1B2C4A;
   padding: 0 0.5rem;
   border-radius: 0.4rem;
 }

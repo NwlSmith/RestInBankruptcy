@@ -9,36 +9,33 @@
     </script>
     <link rel="stylesheet" href="assets/index.css">
     <link rel="shortcut icon" href="assets/kisspng-headstone-grave-cemetery-rest-in-peace-tomb-cemetery-5a7adbb2527a12.1677987415180010743378.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <title>Rest In Backend</title>
   </head>
   <body>
     <header>
-        <h1>Contents</h1>
-        <ul>
-            <li>
-                <a href="#govinfoHeader">Gov Info</a>
-                <ol>
-                    <li><a href="#govinfoGET">GET</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#databaseHeader">DynamoDB API</a>
-                <ol>
-                    <li><a href="#databaseGET">GET</a></li>
-                    <li><a href="#databasePOST">POST</a></li>
-                    <li><a href="#databasePUT">PUT</a></li>
-                    <li><a href="#databaseDELETE">DELETE</a></li>
-                </ol>
-            </li>
-        </ul>
-        <p>Root url for requests will be: <span id="urlText"> </span></p>
+        <div class= "header">
+            <nav>
+                <ul>
+                    <li><a href="#govinfoGET">GOVINFO GET</a></li>
+                    <li><a href="#databaseGET">DB GET</a></li>
+                    <li><a href="#databasePOST">DB POST</a></li>
+                    <li><a href="#databasePUT">DB PUT</a></li>
+                    <li><a href="#databaseDELETE">DB DELETE</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
         <section>
+            <p>Root url for requests will be: <span id="urlText"> </span></p>
+        
             <h1 class="sectionHeader" id="govinfoHeader">Govinfo endpoints</h1>
-            <p>List of endpoints for govinfo related api calls. These calls will all have relative url of <strong>/govinfo</strong></p>
-            <section>
-                <h2 class="sectionHeader" id="govinfoGET">GET requests</h2>
+            <p>List of endpoints for govinfo related api calls. These calls will all have relative url of: <strong>/govinfo</strong></p>
+            <section id="govinfoGET">
+                <h2 class="sectionHeader" >GET requests</h2>
                 <div>
                     <p>
                         Currently there are 2, which will most likely be deprecated in the future.
@@ -71,8 +68,8 @@
         <section>
             <h1 class="sectionHeader" id="databaseHeader">DynamoDB endpoints</h1>
             <p>List of endpoints for performing DynamoDB operations. These calls are will all have relative url of <strong>/dynamoDB</strong></p>
-            <section>
-                <h2 class="sectionHeader" id="databaseGET">GET requests</h2>
+            <section id="databaseGET">
+                <h2 class="sectionHeader" >GET requests</h2>
                 <div>
                     <p>
                         There are currently 2.
@@ -117,8 +114,8 @@
                     </p>
                 </div>
             </section>
-            <section>
-                <h2 class="sectionHeader" id="databasePOST">POST requests</h2>
+            <section id="databasePOST">
+                <h2 class="sectionHeader" >POST requests</h2>
                 <div>
                     <p>
                         There are currently --- post endpoints.
@@ -238,31 +235,8 @@
                     </p>
                 </div>
             </section>
-            <section>
-                <h2 class="sectionHeader" id="databaseDELETE">DELETE requests</h2>
-                <div>
-                    <p>
-                        <section>
-                            <h4 class="endpointText">/doc-attribute/{tablename=required}/{keyName=required}/{keyVal=required}/{fieldName=required}</h4>
-                            <h5>URL params</h5>
-                            tablename: denotes the name of the DynamoDB table that is requested
-                            <br>
-                            keyName: denotes the name of the primary key of the item(s) being requested
-                            <br>
-                            keyVal: denotes value of the primary key of the item(s) being requested
-                            <br>
-                            fieldName: denotes the name of the attribute to be deleted
-                            <br><br>
-                            Example:
-                                <span class="exampleEndpointText">/doc-attribute/GravestoneOfferings/packageId/USCOURTS-deb-1_07-bk-10416/flowers</span>
-                            </p>
-                            Will delete the attribute specified from the table in the database 
-                        </section>
-                    </p>
-                </div>
-            </section>
-            <section>
-                <h2 class="sectionHeader" id="databasePUT">PUT requests</h2>
+            <section id="databasePUT">
+                <h2 class="sectionHeader">PUT requests</h2>
                 <div>
                     <p>
                         There is currently 1.
@@ -302,6 +276,29 @@
                     </p>
                 </div>
             </section> 
+            <section id="databaseDELETE">
+                <h2 class="sectionHeader" >DELETE requests</h2>
+                <div>
+                    <p>
+                        <section>
+                            <h4 class="endpointText">/doc-attribute/{tablename=required}/{keyName=required}/{keyVal=required}/{fieldName=required}</h4>
+                            <h5>URL params</h5>
+                            tablename: denotes the name of the DynamoDB table that is requested
+                            <br>
+                            keyName: denotes the name of the primary key of the item(s) being requested
+                            <br>
+                            keyVal: denotes value of the primary key of the item(s) being requested
+                            <br>
+                            fieldName: denotes the name of the attribute to be deleted
+                            <br><br>
+                            Example:
+                                <span class="exampleEndpointText">/doc-attribute/GravestoneOfferings/packageId/USCOURTS-deb-1_07-bk-10416/flowers</span>
+                            </p>
+                            Will delete the attribute specified from the table in the database 
+                        </section>
+                    </p>
+                </div>
+            </section>
         </section>
     </main>
   </body>
