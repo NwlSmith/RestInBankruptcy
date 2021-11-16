@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { bolsterPackageData, filterPackages } from '../utils/filterData.js'
 
-import { putDoc, getDoc, updateDoc, queryDocs, deleteDocAttribute } from '../utils/dynamoFuncs.js'
+import { putDoc, getDoc, updateDoc, queryDocs, deleteDocAttribute, addFlowers, addComment } from '../utils/dynamoFuncs.js'
 
 const dbRouter = express.Router()
 
@@ -24,7 +24,15 @@ dbRouter.post('/bankruptcies/:earliestdate?/:latestdate?', async (req, res) => {
                 if(result.length > 0) {
                     let promises = []
                     for(let item of result) {
+                        let graveObj = {
+                            "packageId": item.packageId,
+                            "comments": {},
+                            "flowers": 0
+                        }
                         let promise = putDoc(req.body.tableName, item).catch(e => {
+                            res.status(e.$metadata.httpStatusCode).send(e.message) 
+                        })
+                        putDoc("GravestoneOfferings", graveObj).catch(e => {
                             res.status(e.$metadata.httpStatusCode).send(e.message) 
                         })
                         promises.push(promise)
@@ -36,7 +44,6 @@ dbRouter.post('/bankruptcies/:earliestdate?/:latestdate?', async (req, res) => {
                     res.status(404).send("Nothing was found.")
                 }
             })
-            
         })
     }).catch(e => {
         res.status(e.response.status).send(e.response.data)
@@ -78,6 +85,26 @@ dbRouter.post('/doc/bankruptcy', async (req, res) => {
 dbRouter.put('/doc/:tablename', async (req, res) => {
     try {
         let response = await updateDoc(req.params.tablename, req.body.keyObj, req.body.fieldName, req.body.fieldValue)
+        res.status(response.$metadata.httpStatusCode).send(response)
+    } catch (e) {
+        res.status(e.$metadata.httpStatusCode).send(e.message)
+    }
+})
+
+// Increment flower counter
+dbRouter.put('/doc/flowers/:flowernum', async (req, res) => {
+    try {
+        let response = await addFlowers(req.body.keyObj, parseInt(req.params.flowernum));
+        res.status(response.$metadata.httpStatusCode).send(response)
+    } catch (e) {
+        res.status(e.$metadata.httpStatusCode).send(e.message)
+    }
+})
+
+// update comment
+dbRouter.put('/doc/comments/:username', async (req, res) => {
+    try {
+        let response = await addComment(req.body.keyObj, req.params.username, req.body.comment);
         res.status(response.$metadata.httpStatusCode).send(response)
     } catch (e) {
         res.status(e.$metadata.httpStatusCode).send(e.message)

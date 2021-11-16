@@ -46,6 +46,45 @@ const updateDoc = async (tableName, keyObj, field, fieldValue) => {
     }
 };
 
+const addFlowers = async (keyObj, fieldValue) => {
+    const params = {
+        TableName: "GravestoneOfferings",
+        Key: keyObj,
+        UpdateExpression: `set flowers = flowers + :fieldVal`, // not secure but lazy
+        ExpressionAttributeValues: {
+            ":fieldVal": fieldValue
+        },
+        ReturnValues: "UPDATED_NEW"
+      };
+    try {
+        const data = await dynaDocClient.send(new UpdateCommand(params));
+        return data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+const addComment = async (keyObj, fieldName, fieldValue) => {
+    const params = {
+        TableName: "GravestoneOfferings",
+        Key: keyObj,
+        UpdateExpression: `set comments.#user = :fieldVal`, // not secure but lazy
+        ExpressionAttributeNames: {
+            "#user": fieldName
+        },
+        ExpressionAttributeValues: {
+            ":fieldVal": fieldValue
+        },
+        ReturnValues: "UPDATED_NEW"
+      };
+    try {
+        const data = await dynaDocClient.send(new UpdateCommand(params));
+        return data;
+    } catch (err) {
+        throw err;
+    }
+};
+
 const deleteDocAttribute = async (tableName, keyObj, field) => {
     const params = {
         TableName: tableName,
@@ -89,4 +128,4 @@ const queryDocs = async (tableName, pKeyName, pKey, filterObj, lim) => {
 
 
 
-export { putDoc, getDoc, updateDoc, deleteDocAttribute, queryDocs }
+export { putDoc, getDoc, updateDoc, addFlowers, addComment, deleteDocAttribute, queryDocs }
