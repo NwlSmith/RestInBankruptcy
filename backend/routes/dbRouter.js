@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { bolsterPackageData, filterPackages } from '../utils/filterData.js'
 
-import { putDoc, getDoc, updateDoc, queryDocs, deleteDocAttribute } from '../utils/dynamoFuncs.js'
+import { putDoc, getDoc, updateDoc, queryDocs, deleteDocAttribute, addFlowers, addComment, removeComment} from '../utils/dynamoFuncs.js'
 
 const dbRouter = express.Router()
 
@@ -24,7 +24,15 @@ dbRouter.post('/bankruptcies/:earliestdate?/:latestdate?', async (req, res) => {
                 if(result.length > 0) {
                     let promises = []
                     for(let item of result) {
+                        let graveObj = {
+                            "packageId": item.packageId,
+                            "comments": [],
+                            "flowers": 0
+                        }
                         let promise = putDoc(req.body.tableName, item).catch(e => {
+                            res.status(e.$metadata.httpStatusCode).send(e.message) 
+                        })
+                        putDoc("GravestoneOfferings", graveObj).catch(e => {
                             res.status(e.$metadata.httpStatusCode).send(e.message) 
                         })
                         promises.push(promise)
@@ -36,7 +44,6 @@ dbRouter.post('/bankruptcies/:earliestdate?/:latestdate?', async (req, res) => {
                     res.status(404).send("Nothing was found.")
                 }
             })
-            
         })
     }).catch(e => {
         res.status(e.response.status).send(e.response.data)
@@ -74,6 +81,26 @@ dbRouter.post('/doc/bankruptcy', async (req, res) => {
 })
 /**************/
 
+// Increment flower counter
+dbRouter.put('/doc/flowers/:flowernum', async (req, res) => {
+    try {
+        let response = await addFlowers(req.body.keyObj, parseInt(req.params.flowernum));
+        res.status(response.$metadata.httpStatusCode).send(response)
+    } catch (e) {
+        res.status(e.$metadata.httpStatusCode).send(e.message)
+    }
+})
+
+// update comment
+dbRouter.put('/doc/comments', async (req, res) => {
+    try {
+        let response = await addComment(req.body.keyObj, req.body.comment);
+        res.status(response.$metadata.httpStatusCode).send(response)
+    } catch (e) {
+        res.status(e.$metadata.httpStatusCode).send(e.message)
+    }
+})
+
 // update a document in Table = tableName
 dbRouter.put('/doc/:tablename', async (req, res) => {
     try {
@@ -94,7 +121,19 @@ dbRouter.delete('/doc-attribute/:tablename/:keyName/:keyVal/:fieldName', async (
     } catch (e) {
         res.status(e.$metadata.httpStatusCode).send(e.message)
     }
+})
 
+// remove comment by index number
+dbRouter.delete('/doc/comments/:packageId/:indexNum', async (req, res) => {
+    let keyObj = {
+        "packageId": req.params.packageId
+    }
+    try {
+        let response = await removeComment(keyObj, req.params.indexNum);
+        res.status(response.$metadata.httpStatusCode).send(response)
+    } catch (e) {
+        res.status(e.$metadata.httpStatusCode).send(e.message)
+    }
 })
 
 // query documents in Table = tableName by key and value
