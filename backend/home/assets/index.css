@@ -64,7 +64,8 @@ a:link {
 }
 
 h5 {
-    margin: 15px;
+    font-size: 1.1rem;
+    margin: .75rem 0 .25rem 0;
     color: #234099;
 }
 

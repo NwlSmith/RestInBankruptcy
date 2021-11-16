@@ -72,9 +72,10 @@
                 <h2 class="sectionHeader" >GET requests</h2>
                 <div>
                     <p>
-                        There are currently 2.
+                        There are currently 2 GET endpoints.
                         <section>
-                            <h4 class="endpointText">/docs/{tablename=required}/{keyName=required}/{keyVal=required}?{filterName=optional}&{filterValue=optional}</h4>
+                            <h4 class="endpointText">/docs/{tablename=required}/{keyName=required}/{keyVal=required}/{filterName=optional}/{filterValue=optional}</h4>
+                            <br><br>This GET will return an array of objects found in the database with matching criteria
                             <h5>URL params</h5>
                             tablename: denotes the name of the DynamoDB table that is requested
                             <br>
@@ -86,13 +87,43 @@
                             <br>
                             filterValue (default=null): denotes the value of the attribute you want to filter by
                             <p>
-                                Example:
-                                <span class="exampleEndpointText">/docs/GravestoneOfferings/packageId/USCOURTS-deb-1_07-bk-10416?filterName=flowers&filterValue=10</span>
+                                RestInDatabase Example:
+                                <span class="exampleEndpointText">/docs/RestInDatabase/courtState/New York</span>
                             </p>
-                            Will return an array of objects found in the database with matching criteria
+                            Object returned:
+                            <pre><code>                                           
+                    [
+                        {
+                            "revenue_range": "1M - 10M",
+                            "packageId": "USCOURTS-nyeb-8_19-bk-72596",
+                            "courtState": "New York",
+                            "naics_description": "Parking Lots and Garages",
+                            "dateIssued": "2021-04-26",
+                            "lastModified": "2021-04-28T22:35:24Z",
+                            "employees": null,
+                            "employees_range": "10 - 50",
+                            "sic_description": "Miscellaneous personal services",
+                            "title": "Hamilton Road Realty LLC"
+                        },
+                        {
+                            "revenue_range": "10M - 50M",
+                            "packageId": "USCOURTS-nysb-1_18-bk-10509",
+                            "courtState": "New York",
+                            "naics_description": "Other Miscellaneous Manufacturing",
+                            "dateIssued": "2020-04-22",
+                            "lastModified": "2021-04-23T04:14:58Z",
+                            "employees": 177,
+                            "employees_range": "50 - 200",
+                            "sic_description": null,
+                            "title": "Firestar Diamond, Inc. and Fantasy, Inc."
+                        },
+                        ...
+                    ]
+                            </pre></code>
                         </section>
                         <section>
                             <h4 class="endpointText">/doc/{tablename=required}/{keyName=required}/{keyVal=required}/{sortName=optional}/{sortVal=optional}</h4>
+                            <br><br>This GET will return a single matching document from the specified table
                             <h5>URL params</h5>
                             tablename: denotes the name of the DynamoDB table that is requested
                             <br>
@@ -104,12 +135,44 @@
                             <br>
                             sortVal (default=null): denotes the sort key value for the item requested, must use if table has sort key
                             <p>
-                                Example:
-                                <span class="exampleEndpointText">/doc/RestInDatabase/courtState/New York/packageId/USCOURTS-nysb-1_18-bk-13359</span>
-                                <br>
-                                Note: Some values may need spaces so either encode the request url, or it can be represented with "%20"
+                                GravestoneOfferings Example:  
+                                <span class="exampleEndpointText">/doc/GravestoneOfferings/packageId/USCOURTS-nywb-1_05-bk-11270</span>
                             </p>
-                            Will return a single matching document from the specified table
+                            Object returned:
+                            <pre><code>
+                    {
+                        "comments": [                           
+                            "Hi there",
+                            "Hi there"
+                        ],
+                        "packageId": "USCOURTS-nywb-1_05-bk-11270",     
+                        "flowers": 0                                
+                    }
+                            </pre></code>
+                            <br><br>
+                            <p>
+                                RestInDatabase Example:
+                                <span class="exampleEndpointText">/doc/RestInDatabase/courtState/New York/packageId/USCOURTS-nysb-1_18-bk-13359</span>
+                            </p>
+                            Object returned:
+                            <pre><code>
+                    {
+                        "revenue_range": "10M - 50M",                        
+                        "packageId": "USCOURTS-nywb-1_05-bk-11270",              
+                        "courtState": "New York",                                               
+                        "naics_description": "Nursing and Residential Care Facilities",         
+                        "dateIssued": "2006-09-22",
+                        "lastModified": "2021-09-13T21:00:30Z",
+                        "employees": 289,
+                        "employees_range": "200 - 500",
+                        "description": null,
+                        "sic_description": null,
+                        "title": "Legacy Health Care LLC"
+                    }
+                            </pre></code>
+
+                            <br> Note: Some values may need spaces so either encode the request url, or it can be represented with "%20"
+                            
                         </section>
                     </p>
                 </div>
@@ -118,13 +181,16 @@
                 <h2 class="sectionHeader" >POST requests</h2>
                 <div>
                     <p>
-                        There are currently --- post endpoints.
+                        There are currently 3 POST endpoints.
                         <section>
                             <h4 class="endpointText">/doc</h4>
                             <br><br>
-                            Will insert an object into the table <code> tableName</code>
+                            This post will insert an object into the table <code> tableName</code>
+                            <h5>Object fields</h5>
+                            tablename: name of dynamoDB table
+                            <br>doc: package info (see below for table-specific examples)
                             <br><br>
-                            Object format:
+                            Object body:
                                 <pre><code>
                     {
                         "tableName": string             // table name
@@ -134,54 +200,27 @@
                         }
                     }
                                 </pre></code>
-                            <!-- <p>
-                                Example:
-                                <span class="exampleEndpointText">/doc</span>
-                                <br><br>
-                                Object posted:
-                                <pre><code>
-                    {
-                        "tableName": "GravestoneOfferings"
-                        "doc":{
-                            "comments": {
-                                "User1": "hi, im user1"
-                            },
-                            "packageId": "USCOURTS-deb-1_07-bk-10416",
-                            "flowers": 1
-                        }
-                    }
-                                </pre></code>
-                            </p> -->
                         </section>
                         <section>
                             <h4 class="endpointText">/doc/gravestone</h4>
                             <br><br>
-                            Will insert a JSON object into the GravestoneOfferings table
+                            This post will insert a JSON object into the GravestoneOfferings table
+                            <h5>Object fields</h5>
+                            comments: an array of anonymous comments
+                            <br>flowers: number of flowers at the gravestone
+                            <br>packageId: the bankruptcy case package ID
                             <br><br>
-                            Object format:
-                                <pre><code>
-                    {
-                        "comments": {                   // list of comments
-                                "User1": string,
-                                "User2": string         // User1's and User2's comments 
-                            },
-                            "packageId": string         // the specific associated bankruptcy case's unique packageId  
-                            "flowers": int              // number of flowers 
-                        }
-                    }
-                                </pre></code>
                             <p>
                                 Example:
                                 <span class="exampleEndpointText">/doc/gravestone</span>
                                 <br><br>
-                                Object posted:
+                                Object body:
                                 <pre><code>
+  
                     {
-                        "comments": {
-                            "User1": "hi, im user1"
-                        },
                         "packageId": "USCOURTS-deb-1_07-bk-10416",
-                        "flowers": 1
+                        "flowers": 1,
+                        comments: ["hi there"]
                     }
                                 </pre></code>
                             </p>
@@ -189,46 +228,38 @@
                         <section>
                             <h4 class="endpointText">/doc/bankruptcy</h4>
                             <br><br>
-                            Will insert an object into the RestInDatabase table
+                            This post will insert an object into the RestInDatabase table
+                            <h5>Object fields</h5>
+                            revenue_range: company's revenue range
+                            <br>packageId: the bankruptcy case package ID 
+                            <br>courtState: State the court is located
+                            <br>naics_description: NAICS categorization for the company
+                            <br>dateIssued: date the bankruptcy was filed
+                            <br>lastModified: When this case was last modified on the govInfo server
+                            <br>employees: number of employees
+                            <br>DateIncorporated: date this company was founded
+                            <br>employees_range: range the number of employees fall into
+                            <br> sic_description: SIC categorization for the company
+                            <br> title: title of the case / name of the company
                             <p>
                                 Example:
                                 <span class="exampleEndpointText">/doc/bankruptcy</span>
                                 <br><br>
-                                Object posted:
+                                Object body:
                                 <pre><code>
                     {
-                        "governmentAuthor1": "United States Bankruptcy Court Southern District of New York",
-                        "documentType": "USCOURTS",
-                        "courtState": "New York",
-                        "dateIssued": "2021-10-15",
-                        "lastModified": "2021-10-18T07:52:12Z",
-                        "caseNumber": "1:18-bk-13359",
-                        "courtCircuit": "2nd",
-                        "courtType": "Bankruptcy",
-                        "courtCode": "nysb",
-                        "packageId": "USCOURTS-nysb-1_18-bk-13359",
-                        "suDocClassNumber": "JU 14.15",
-                        "detailsLink": "https://www.govinfo.gov/app/details/USCOURTS-nysb-1_18-bk-13359",
-                        "parties": [
-                            {
-                                "lastName": "Miami Metals I, Inc.",
-                                "fullName": "Miami Metals I, Inc.",
-                                "role": "Debtor"
-                            },
-                            {
-                                "lastName": "United States Trustee",
-                                "fullName": "United States Trustee",
-                                "role": "U.S. Trustee"
-                            },
-                            {
-                                "lastName": "ICBC Standard Bank",
-                                "fullName": "ICBC Standard Bank",
-                                "role": "Creditor"
-                            }
-                        ],
-                        "caseOffice": "Manhattan",
-                        "title": "Miami Metals I, Inc., et al."
-                    }
+                        "revenue_range": "1M - 10M",
+                        "packageId": "USCOURTS-nysb-1_19-bk-12662",             //required
+                        "courtState": "New York",                               //required
+                        "naics_description": "Specialized Design Services",
+                        "dateIssued": "2020-07-28",                             //required
+                        "lastModified": "2021-04-23T04:20:10Z",                 //required
+                        "employees": null,
+                        "DateIncorporated": "2015-02-18T00:00:00.000",
+                        "employees_range": "10 - 50",
+                        "sic_description": "Business Services",
+                        "title": "Fuigo LLC"                                    //required
+                    }   
                                 </pre></code>
                             </p>
                         </section>
@@ -239,29 +270,72 @@
                 <h2 class="sectionHeader">PUT requests</h2>
                 <div>
                     <p>
-                        There is currently 1.
+                        There are currently 3 PUT endpoints.
                         <section>
-                            <h4 class="endpointText">/doc/{tablename=required}</h4>
+                            <h4 class="endpointText">/doc/flowers/{flowernum=required}</h4>
                             <br><br>
-                            Will update/insert an object into the stated <code> tablename </code>
+                            This put will update/insert flowers into the proper package within the GravestoneOfferings table
                             <h5>URL params</h5>
-                            tablename: denotes the name of the DynamoDB table that is requested
+                            flowernum: denotes the number of flowers to insert into the table
+                            <h5>Object fields</h5>
+                            keyObj: holds the packageId key-value pair
+                            <br>packageId: the bankruptcy case package ID
                             <br><br>
-                            Object format:
+                            <p>
+                                Example:
+                                <span class="exampleEndpointText">/doc/flowers/3</span>
+                                <br><br>
+                                Object body:
                                 <pre><code>
                     {
                         "keyObj":{
-                            "packageId": string         //appropriate key-value pair for packageId
-                        },
-                        "fieldName": string,            //field name to be updated
-                        "fieldValue": int               //field value to be updated
+                            "packageId": "USCOURTS-nywb-1_05-bk-11270"
+                        }
                     }
                                 </pre></code>
+                            </p>
+                        </section>
+                        <section>
+                            <h4 class="endpointText">/doc/comments</h4>
+                            <br><br>
+                            Will insert a comment into the proper package within the GravestoneOfferings table
+                            <h5>Object fields</h5>
+                            keyObj: holds the packageId key-value pair
+                            <br>packageId: the bankruptcy case package ID
+                            <br>comment: the comment to be inserted
+                            <br><br>
                             <p>
                                 Example:
+                                <span class="exampleEndpointText">/doc/comments</span>
+                                <br><br>
+                                Object body:
+                                <pre><code>
+                    {
+                        "keyObj":{
+                            "packageId": "USCOURTS-nywb-1_05-bk-11270"
+                        },
+                        "comment": "Hi there"
+                    }
+                                </pre></code>
+                            </p>
+                        </section>
+                        <section>
+                            <h4 class="endpointText">/doc/{tablename=required}</h4>
+                            <br><br>
+                            This put will update/insert an object into the stated <code> tablename </code>
+                            <h5>URL params</h5>
+                            tablename: denotes the name of the DynamoDB table that is requested
+                            <h5>Object fields</h5>
+                            keyObj: holds the packageId key-value pair
+                            <br>packageId: the bankruptcy case package ID
+                            <br>fieldName: the field name of the value that is to be changed
+                            <br>fieldValue: the new value that is to be inserted
+                            <br><br>
+                            <p>
+                                GravestoneOfferings Example
                                 <span class="exampleEndpointText">/doc/GravestoneOfferings</span>
                                 <br><br>
-                                Object updated:
+                                Object body:
                                 <pre><code>
                     {
                         "keyObj":{
@@ -269,6 +343,21 @@
                         },
                         "fieldName": "flowers",
                         "fieldValue": "1"
+                    }
+                                </pre></code>
+                            </p>
+                            <p>
+                                RestInDatabase Example
+                                <span class="exampleEndpointText">/doc/RestInDatabase</span>
+                                <br><br>
+                                Object body:
+                                <pre><code>
+                    {
+                        "keyObj":{
+                            "packageId": "USCOURTS-deb-1_07-bk-10416"
+                        },
+                        "fieldName": "sic_description",
+                        "fieldValue": "Hotel Businesses"
                     }
                                 </pre></code>
                             </p>
@@ -280,21 +369,34 @@
                 <h2 class="sectionHeader" >DELETE requests</h2>
                 <div>
                     <p>
+                        There are currently 2 DELETE endpoints.
                         <section>
                             <h4 class="endpointText">/doc-attribute/{tablename=required}/{keyName=required}/{keyVal=required}/{fieldName=required}</h4>
+                            <br><br>This delete will remove the attribute specified from the table in the database.
                             <h5>URL params</h5>
                             tablename: denotes the name of the DynamoDB table that is requested
-                            <br>
-                            keyName: denotes the name of the primary key of the item(s) being requested
-                            <br>
-                            keyVal: denotes value of the primary key of the item(s) being requested
-                            <br>
-                            fieldName: denotes the name of the attribute to be deleted
+                            <br>keyName: denotes the name of the primary key of the item(s) being requested
+                            <br>keyVal: denotes value of the primary key of the item(s) being requested
+                            <br>fieldName: denotes the name of the attribute to be deleted
                             <br><br>
                             Example:
                                 <span class="exampleEndpointText">/doc-attribute/GravestoneOfferings/packageId/USCOURTS-deb-1_07-bk-10416/flowers</span>
                             </p>
-                            Will delete the attribute specified from the table in the database 
+                            This will remove the flowers field from package: USCOURTS-deb-1_07-bk-10416.
+                            
+                        </section>
+                        <section>
+                            <h4 class="endpointText">/doc/comments/{packagedId=required}/{indexNum=required}</h4>
+                            <br><br>This will delete the comment at the specified index (starting at 0)
+                            <h5>URL params</h5>
+                            packageId: the bankruptcy case package ID
+                            <br>indexNum: index number of the comment to be deleted
+                            <br><br>
+                            Example:
+                                <span class="exampleEndpointText">/doc/comments/USCOURTS-deb-1_07-bk-10416/1</span>
+                            </p>
+                            This will remove the second comment from package: USCOURTS-deb-1_07-bk-10416.
+                            
                         </section>
                     </p>
                 </div>
