@@ -44,7 +44,7 @@ button{
 	border: 1px solid #EFFFFA;
 	background-color: transparent;
 	cursor: pointer;
-	color: white;
+	color: #EFFFFA;;
 	font-size: 16px;
 	font-family: 'Chakra Petch', sans-serif;
 	filter: drop-shadow(0px 0px 5px #FFFFFF);
@@ -88,12 +88,115 @@ h3{
 	line-height: 40px;
 }
 
+h4{
+	color: #1B2C4A;
+	font-weight: regular;
+	font-size: 24px;
+	padding: 0px;
+}
+
 p{
 	font-weight: regular;
 	font-size: 20px;
 	line-height: 34px;
 }
 
+label{
+	margin-right: 20px;
+	font-family: 'Chakra Petch', sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.72);
+}
+
+select{
+	background-color: transparent;
+	width: 180px;
+	height: 40px;
+	border: 1px solid #EFFFFA;
+	padding: 5px;
+	font-family: 'Lato', sans-serif;;
+	color: white;
+	filter: drop-shadow(0px 0px 5px #FFFFFF);
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+#list-container{
+	margin-top: 30px;
+	width: 100%;
+	height: 1000px;
+	background-color: #EFFFFA;
+	border-radius: 30px;
+	overflow: scroll;
+}
+
+.company{
+	margin: auto;
+	margin-top: 40px;
+	width: 95%;
+	border: 3px solid #1B2C4A;
+	border-radius: 30px;
+}
+
+h5{
+	color: #1B2C4A;
+	font-size: 20px;
+	line-height: 34px;
+	margin-left: 20px;
+	font-weight: bold;
+}
+
+.basic, .right, .flowers, .comments{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.left{
+	margin: 0px 0px 0px 25px;
+}
+
+.right{
+	margin: 0px 25px 0px 0px;
+}
+
+.flowers, .comments{
+	margin: 0px 100px 0px 0px;
+}
+
+.details{
+	margin: 0px 25px 25px 25px;
+	display: none;
+}
+
+.details h5{
+	font-family: 'Chakra Petch', sans-serif;
+	margin: 0px;
+}
+
+.details p{
+	color: #1B2C4A;
+	font-size: 16px;
+	margin: 0px;
+	overflow-wrap: break-word;
+}
+
+.category{
+	width: 15%;
+}
+
+.content{
+	width: 85%;
+}
+
+.info{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	margin: 25px 0px 0px 0px;
+}
 
 @media (min-width: 500px) and (max-width: 1400px){
 	h1{
