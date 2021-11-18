@@ -130,6 +130,7 @@ select{
 	background-color: #EFFFFA;
 	border-radius: 30px;
 	overflow: scroll;
+	padding-bottom: 50px;
 }
 
 .company{
@@ -166,17 +167,17 @@ h5{
 	margin: 0px 100px 0px 0px;
 }
 
-.details{
+#details{
 	margin: 0px 25px 25px 25px;
 	display: none;
 }
 
-.details h5{
+#details h5{
 	font-family: 'Chakra Petch', sans-serif;
 	margin: 0px;
 }
 
-.details p{
+#details p{
 	color: #1B2C4A;
 	font-size: 16px;
 	margin: 0px;
