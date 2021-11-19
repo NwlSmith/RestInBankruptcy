@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="styles/style.css">
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+		<style>
+			body{
+				height: 100%;
+				background-color: rgba(27,44,74,1);
+				background-image: linear-gradient(to bottom right, rgba(27,44,74,1), rgba(67,147,136,1) );
+				background-attachment:fixed;
+				height:100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<a href="index.html"><img src="images/ghost.png" class="logo"></a>
+			<nav>
+				<a href="about.html">About</a>
+				<a href="companies.html" style="border-bottom: 2px solid #EFFFFA;">Companies</a>
+				<button>Enter Graveyard</button>
+			</nav>
+		</header>
+		<h1>Companies</h1>
+		<form>  
+			<label> Sort By </label>  
+			<select>  
+				<option value = "popular">Most Popular</option>  
+				<option value = "survival">Survival Time</option>  
+				<option value = "size">Size of Company</option>  
+			</select>  
+		</form>
+
+		<div id="list-container">
+			<div class="company">
+				<div class="basic">
+					<div class="left">
+						<h4>Company Name</h4>
+					</div>
+					<div class="right">
+						<div class="flowers">
+							<img src="images/flower.png" width="50px" height="70px">
+							<h5>5k+</h5>
+						</div>
+						<div class="comments">
+							<img src="images/letter.png" width="65px" height="65px">
+							<h5>3k+</h5>
+						</div>
+						<img src="images/arrow.png" width="30px" height="30px" style="transform: rotate(0deg)" id="arrow" onclick="expand()">
+					</div>
+				</div>
+				<div id="details">
+					<div class="info">
+						<div class="category">
+							<h5>Survival Dates</h5>
+						</div>
+						<div class="content">
+							<p>2000.05.04 - 2021.01.01</p>
+						</div>
+					</div>
+					<div class="info">
+						<div class="category">
+							<h5>Revenue</h5>
+						</div>
+						<div class="content">
+							<p>0 - 10M</p>
+						</div>
+					</div>
+					<div class="info">
+						<div class="category">
+							<h5>Employee</h5>
+						</div>
+						<div class="content">
+							<p>10000 - 15000</p>
+						</div>
+					</div>
+					<div class="info">
+						<div class="category">
+							<h5>Description</h5>
+						</div>
+						<div class="content">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</body>
+	<script src="js/script.js"></script>
+</html>
