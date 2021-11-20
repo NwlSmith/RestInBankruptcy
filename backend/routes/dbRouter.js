@@ -11,7 +11,7 @@ const apiKey = "&api_key=" + process.env.GOVAPIKEY
 
 // create a series of bankruptcies in Table = tableName
 dbRouter.post('/bankruptcies/:earliestdate?/:latestdate?', async (req, res) => {
-    axios.get(`https://api.govinfo.gov/collections/USCOURTS/${req.params.earliestdate || "2020-01-01"}T12%3A00%3A00Z${req.params.latestdate ? ("/" + req.params.latestdate + "T12%3A00%3A00Z") : ""}?offset=${req.query.offset || 0}&pageSize=${req.query.pageSize || 100}&courtType=Bankruptcy` + apiKey)
+    axios.get(`https://api.govinfo.gov/published/${req.params.earliestdate || "2020-01-01"}T12%3A00%3A00Z${req.params.latestdate ? ("/" + req.params.latestdate + "T12%3A00%3A00Z") : ""}?offset=${req.query.offset || 0}&pageSize=${req.query.pageSize || 100}&courtType=Bankruptcy&collection=USCOURTS` + apiKey)
     .then(response => {
         filterPackages(response.data.packages).then(filtered => {
             let newitems = []
