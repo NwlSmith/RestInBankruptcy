@@ -33,65 +33,164 @@ const compiledCompDets = async () => {
     return companyDetails
 }
 
-const compElements = (companies) => {
+const addData = (companies) => {
     let elements = []
-    for(let comp of companies) {
-        let el = document.createElement('div')
-        el.classList.add('company')
-        let template = `
-            <div class="basic">
-                <div class="left">
-                    <h4>${comp[1].title}</h4>
-                </div>
-                <div class="right">
-                    <div class="flowers">
-                        <img src="images/flower.png" width="50px" height="70px">
-                        <h5>${comp[0].flowers}</h5>
-                    </div>
-                    <div class="comments">
-                        <img src="images/letter.png" width="65px" height="65px">
-                        <h5>${comp[0].comments.length}</h5>
-                    </div>
-                    <img src="images/arrow.png" width="30px" height="30px" style="transform: rotate(0deg)" id="arrow" onclick="expand()">
-                </div>
-            </div>
-            <div id="details">
-                <div class="info">
-                    <div class="category">
-                        <h5>Survival Dates</h5>
-                    </div>
-                    <div class="content">
-                        <p>${comp[1].DateIncorporated ? comp[1].DateIncorporated : comp[1].dateIssued} - ${comp[1].lastModified}</p>
-                    </div>
-                </div>
-                <div class="info">
-                    <div class="category">
-                        <h5>Revenue</h5>
-                    </div>
-                    <div class="content">
-                        <p>${comp[1].revenue_range}</p>
-                    </div>
-                </div>
-                <div class="info">
-                    <div class="category">
-                        <h5>Employee</h5>
-                    </div>
-                    <div class="content">
-                        <p>${comp[1].employees_range}</p>
-                    </div>
-                </div>
-                <div class="info">
-                    <div class="category">
-                        <h5>Description</h5>
-                    </div>
-                    <div class="content">
-                        <p>${comp[1].description}</p>
-                    </div>
-                </div>
-            </div>`
-        el.insertAdjacentHTML("beforeend", template.trim())
-        elements.push(el)
-    }
+    companies.forEach((companyData, index) => {
+        let company = document.createElement('div')
+        company.classList.add("company")
+
+        let basic = document.createElement('div')
+        basic.classList.add("basic")
+
+        company.appendChild(basic)
+
+        let left = document.createElement('div')
+        left.classList.add("left")
+
+        let titleH4 = document.createElement('h4')
+        titleH4.textContent = companyData[1].title
+
+        basic.appendChild(left)
+        left.appendChild(titleH4)
+
+        let right = document.createElement('div')
+        right.classList.add("right")
+
+        let flowers = document.createElement('div')
+        flowers.classList.add("flowers")
+
+        let flowerLogo = document.createElement('img')
+        flowerLogo.classList.add("flowerLogo")
+        flowerLogo.src = './images/flower.png'
+        
+        let flowerH5 = document.createElement('h5')
+        flowerH5.textContent = companyData[0].flowers
+
+        basic.appendChild(right)
+        right.appendChild(flowers)
+        flowers.appendChild(flowerLogo)
+        flowers.appendChild(flowerH5)
+
+        let comments = document.createElement('div')
+        comments.classList.add("comments")
+
+        let letterLogo = document.createElement('img')
+        letterLogo.classList.add("letterLogo")
+        letterLogo.src = './images/letter.png'
+        
+
+        let letterH5 = document.createElement('h5')
+        letterH5.textContent = companyData[0].comments.length
+
+        right.appendChild(comments)
+        comments.appendChild(letterLogo)
+        comments.appendChild(letterH5)
+
+        let arrow = document.createElement('img')
+        arrow.classList.add("arrow")
+        let arrowNum = `arrow${index}`
+        let detailNum = `details${index}`
+        arrow.setAttribute("id", arrowNum)
+        arrow.src = 'images/arrow.png'
+
+        arrow.addEventListener("click",()=>{
+            expand(arrowNum, detailNum)
+        })
+        
+        right.appendChild(arrow)
+        
+        let details = document.createElement('div')
+        details.classList.add("details")
+        details.setAttribute("id", detailNum)
+
+        company.appendChild(details)
+
+        let info1 = document.createElement('div')
+        info1.classList.add("info")
+
+        let category1 = document.createElement('div')
+        category1.classList.add("category")
+        
+        let category1H5 = document.createElement('h5')
+        category1H5.textContent = "Survival Dates"
+
+        let content1 = document.createElement('div')
+        content1.classList.add("content")
+        
+        let content1P = document.createElement('p')
+        content1P.textContent = `${companyData[1].DateIncorporated ? companyData[1].DateIncorporated.slice(0, 10) : companyData[1].dateIssued.slice(0, 10)} - ${companyData[1].lastModified.slice(0, 10)}`
+        
+        details.appendChild(info1)
+        info1.appendChild(category1)
+        category1.appendChild(category1H5)
+        info1.appendChild(content1)
+        content1.appendChild(content1P)
+
+        let info2 = document.createElement('div')
+        info2.classList.add("info")
+
+        let category2 = document.createElement('div')
+        category2.classList.add("category")
+
+        let category2H5 = document.createElement('h5')
+        category2H5.textContent = "Revenue"
+
+        let content2 = document.createElement('div')
+        content2.classList.add("content")
+
+        let content2P = document.createElement('p')
+        content2P.textContent = `${companyData[1].revenue_range}`
+        
+        details.appendChild(info2)
+        info2.appendChild(category2)
+        category2.appendChild(category2H5)
+        info2.appendChild(content2)
+        content2.appendChild(content2P)
+
+        let info3 = document.createElement('div')
+        info3.classList.add("info")
+
+        let category3 = document.createElement('div')
+        category3.classList.add("category")
+
+        let category3H5 = document.createElement('h5')
+        category3H5.textContent = "Employees"
+
+        let content3 = document.createElement('div')
+        content3.classList.add("content")
+
+        let content3P = document.createElement('p')
+        content3P.textContent = `${companyData[1].employees_range}`
+        
+        details.appendChild(info3)
+        info3.appendChild(category3)
+        category3.appendChild(category3H5)
+        info3.appendChild(content3)
+        content3.appendChild(content3P)
+
+        let info4 = document.createElement('div')
+        info4.classList.add("info")
+
+        let category4 = document.createElement('div')
+        category4.classList.add("category")
+
+        let category4H5 = document.createElement('h5')
+        category4H5.textContent = "Description"
+
+        let content4 = document.createElement('div')
+        content4.classList.add("content")
+
+        let content4P = document.createElement('p')
+        content4P.textContent = `${companyData[1].description? companyData[1].description : companyData[1].naics_description? companyData[1].naics_description : "Company description not currently available."} `
+        
+        details.appendChild(info4)
+        info4.appendChild(category4)
+        category4.appendChild(category4H5)
+        info4.appendChild(content4)
+        content4.appendChild(content4P)
+
+        elements.push(company)
+    })
     return elements
 }
 
@@ -114,7 +213,7 @@ const insertElements = (eles, container) => {
 const run =  {
     run: async () => {
         companyDets = await compiledCompDets()
-        elements = compElements(companyDets)
+        elements = addData(companyDets)
         insertElements(elements, compContainer)
     },
     sortPop: () => {
@@ -127,7 +226,7 @@ const run =  {
                 return 0
             }
         })
-        let sortEls = compElements(sorted)
+        let sortEls = addData(sorted)
         for(let i = 0; i < containerChildren.length; i++) {
             compContainer.replaceChild(sortEls[i], containerChildren[i])
         }

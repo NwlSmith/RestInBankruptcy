@@ -172,17 +172,45 @@ h5{
 	margin: 0px 100px 0px 0px;
 }
 
-#details{
+.flowerLogo{
+	height: 70px;
+	width: 50px;
+}
+
+.letterLogo{
+	width: 65px;
+	height: 65px;
+}
+
+.arrow{
+	width: 30px;
+	height: 30px;
+	transform: rotate(0deg);
+}
+
+.arrowUp{
+	width: 30px;
+	height: 30px;
+	transform: rotate(180deg);
+}
+
+.details{
 	margin: 0px 25px 25px 25px;
 	display: none;
 }
 
-#details h5{
+.detailsShow{
+	margin: 0px 25px 25px 25px;
+	display: block;
+	/* transition: all 2s linear; */
+}
+
+.details h5, .detailsShow h5{
 	font-family: 'Chakra Petch', sans-serif;
 	margin: 0px;
 }
 
-#details p{
+.details p, .detailsShow p{
 	color: #1B2C4A;
 	font-size: 16px;
 	margin: 0px;
@@ -246,7 +274,6 @@ h5{
 		transform: rotateY(3600deg);
 	}
 }
-
 
 @media only screen and (max-width: 1400px){
 	body{
