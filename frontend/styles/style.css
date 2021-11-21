@@ -197,6 +197,7 @@ h5{
 .detailsShow{
 	margin: 0px 25px 25px 25px;
 	display: block;
+	/* transition: all 2s linear; */
 }
 
 .details h5, .detailsShow h5{
