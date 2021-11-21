@@ -30,7 +30,7 @@
 		<h1>Companies</h1>
 		<form>  
 			<label> Sort By </label>  
-			<select>  
+			<select id="sortSelect" onchange="sortHandler()">  
 				<option value = "popular">Most Popular</option>  
 				<option value = "survival">Survival Time</option>  
 				<option value = "size">Size of Company</option>  
@@ -38,7 +38,7 @@
 		</form>
 
 		<div id="list-container">
-			<div class="company">
+			<!-- <div class="company">
 				<div class="basic">
 					<div class="left">
 						<h4>Company Name</h4>
@@ -89,7 +89,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
 	<script src="js/script.js"></script>

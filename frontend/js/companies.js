@@ -24,68 +24,117 @@ const compiledCompDets = async () => {
     return companyDetails
 }
 
-let compContainer = document.getElementById("list-container")
-
-const insertComps = () => {
-    compiledCompDets().then(companies => {
-        for(let comp of companies) {
-            let template = `
-            <div class="company">
-                <div class="basic">
-                    <div class="left">
-                        <h4>${comp[1].title}</h4>
-                    </div>
-                    <div class="right">
-                        <div class="flowers">
-                            <img src="images/flower.png" width="50px" height="70px">
-                            <h5>${comp[0].flowers}</h5>
-                        </div>
-                        <div class="comments">
-                            <img src="images/letter.png" width="65px" height="65px">
-                            <h5>${comp[0].comments.length}</h5>
-                        </div>
-                        <img src="images/arrow.png" width="30px" height="30px" style="transform: rotate(0deg)" id="arrow" onclick="expand()">
-                    </div>
+const compElements = (companies) => {
+    let elements = []
+    for(let comp of companies) {
+        let el = document.createElement('div')
+        el.classList.add('company')
+        let template = `
+            <div class="basic">
+                <div class="left">
+                    <h4>${comp[1].title}</h4>
                 </div>
-                <div id="details">
-                    <div class="info">
-                        <div class="category">
-                            <h5>Survival Dates</h5>
-                        </div>
-                        <div class="content">
-                            <p>${comp[1].DateIncorporated ? comp[1].DateIncorporated : comp[1].dateIssued} - ${comp[1].lastModified}</p>
-                        </div>
+                <div class="right">
+                    <div class="flowers">
+                        <img src="images/flower.png" width="50px" height="70px">
+                        <h5>${comp[0].flowers}</h5>
                     </div>
-                    <div class="info">
-                        <div class="category">
-                            <h5>Revenue</h5>
-                        </div>
-                        <div class="content">
-                            <p>${comp[1].revenue_range}</p>
-                        </div>
+                    <div class="comments">
+                        <img src="images/letter.png" width="65px" height="65px">
+                        <h5>${comp[0].comments.length}</h5>
                     </div>
-                    <div class="info">
-                        <div class="category">
-                            <h5>Employee</h5>
-                        </div>
-                        <div class="content">
-                            <p>${comp[1].employees_range}</p>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="category">
-                            <h5>Description</h5>
-                        </div>
-                        <div class="content">
-                            <p>${comp[1].description}</p>
-                        </div>
-                    </div>
+                    <img src="images/arrow.png" width="30px" height="30px" style="transform: rotate(0deg)" id="arrow" onclick="expand()">
                 </div>
             </div>
-            `
-            compContainer.insertAdjacentHTML('beforeend', template)
-        }
-    })
+            <div id="details">
+                <div class="info">
+                    <div class="category">
+                        <h5>Survival Dates</h5>
+                    </div>
+                    <div class="content">
+                        <p>${comp[1].DateIncorporated ? comp[1].DateIncorporated : comp[1].dateIssued} - ${comp[1].lastModified}</p>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="category">
+                        <h5>Revenue</h5>
+                    </div>
+                    <div class="content">
+                        <p>${comp[1].revenue_range}</p>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="category">
+                        <h5>Employee</h5>
+                    </div>
+                    <div class="content">
+                        <p>${comp[1].employees_range}</p>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="category">
+                        <h5>Description</h5>
+                    </div>
+                    <div class="content">
+                        <p>${comp[1].description}</p>
+                    </div>
+                </div>
+            </div>`
+        el.insertAdjacentHTML("beforeend", template.trim())
+        elements.push(el)
+    }
+    return elements
 }
 
-insertComps()
+const insertElements = (eles, container) => {
+    for(let el of eles) {
+        container.appendChild(el)
+    }
+}
+
+
+const compContainer = document.getElementById("list-container")
+const containerChildren = compContainer.children
+let companyDets
+let elements
+
+
+const run =  {
+    run: async () => {
+        companyDets = await compiledCompDets()
+        elements = compElements(companyDets)
+        insertElements(elements, compContainer)
+    },
+    sortPop: () => {
+        let sorted = companyDets.sort((a,b) => {
+            if(a[0].flowers > b[0].flowers) {
+                return -1
+            } else if(a[0].flowers < b[0].flowers) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+        let sortEls = compElements(sorted)
+        for(let i = 0; i < containerChildren.length; i++) {
+            compContainer.replaceChild(sortEls[i], containerChildren[i])
+        }
+    }
+}
+
+run.run()
+
+const sortHandler = () => {
+    let sortSelector = document.getElementById("sortSelect")
+    switch(sortSelector.value) {
+        case "popular":
+            run.sortPop()
+            break
+        case "survival":
+            console.log("survival")
+            break
+        case "size":
+            console.log("size")
+            break
+    }
+}
