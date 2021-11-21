@@ -1,5 +1,14 @@
 const fetchURL = 'http://18.220.179.6:8080/dynamoDB/docs/'
 
+const compContainer = document.getElementById("list-container")
+const containerChildren = compContainer.children
+const loadingEl = document.createElement('div')
+loadingEl.classList.add("lds-circle")
+loadingEl.insertAdjacentHTML('beforeend', '<div>R.i.B</div>')
+compContainer.appendChild(loadingEl)
+let companyDets
+let elements
+
 const compiledCompDets = async () => {
     let companyDetails = []
     try {
@@ -87,17 +96,20 @@ const compElements = (companies) => {
 }
 
 const insertElements = (eles, container) => {
+    let docfrag = document.createDocumentFragment()
     for(let el of eles) {
-        container.appendChild(el)
+        docfrag.appendChild(el)
     }
+    loadingEl.classList.add("hidden")
+    compContainer.addEventListener("transitionend", () => {
+        container.appendChild(docfrag)
+        compContainer.removeChild(loadingEl)
+    })
+    compContainer.removeEventListener("transitionend", () => {
+        container.appendChild(docfrag)
+        compContainer.removeChild(loadingEl)
+    })
 }
-
-
-const compContainer = document.getElementById("list-container")
-const containerChildren = compContainer.children
-let companyDets
-let elements
-
 
 const run =  {
     run: async () => {
