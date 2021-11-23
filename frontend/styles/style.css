@@ -133,10 +133,16 @@ select > option:nth-child(n) {
 	height: 1000px;
 	background-color: #EFFFFA;
 	border-radius: 30px;
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	padding-bottom: 50px;
 }
+
+#list-container::-webkit-scrollbar {
+	display: none;
+}
+
+
 
 .company{
 	margin: auto;
