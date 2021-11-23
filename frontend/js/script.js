@@ -1,14 +1,17 @@
-function expand(){
-	var arrow = document.getElementById("arrow");
-	var details = document.getElementById("details");
+function expand(arrowIndex, detailNum){
+	var arrow = document.getElementById(arrowIndex);
+	var details = document.getElementById(detailNum);
 
-
-	if (arrow.style.transform == "rotate(0deg)"){
-		details.style.display = "block";
-		arrow.style.transform = "rotate(180deg)";
+	if (arrow.classList.contains("arrow")){
+		details.classList.remove("details")
+		details.classList.add("detailsShow")
+		arrow.classList.remove("arrow")
+		arrow.classList.add("arrowUp")
 	}
 	else{
-		details.style.display = "none";
-	 	arrow.style.transform = "rotate(0deg)";
+		details.classList.remove("detailsShow")
+		details.classList.add("details")
+		arrow.classList.remove("arrowUp")
+		arrow.classList.add("arrow")
 	}
 }
