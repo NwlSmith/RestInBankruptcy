@@ -133,9 +133,13 @@ select > option:nth-child(n) {
 	height: 1000px;
 	background-color: #EFFFFA;
 	border-radius: 30px;
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	padding-bottom: 50px;
+}
+
+#list-container::-webkit-scrollbar {
+	display: none;
 }
 
 .company{
@@ -158,6 +162,7 @@ h5{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	z-index: 1;
 }
 
 .left{
@@ -175,6 +180,27 @@ h5{
 .flowerLogo{
 	height: 70px;
 	width: 50px;
+}
+
+.flowerLogo:hover{
+	animation: flower-glow infinite 2s;
+}
+
+@keyframes flower-glow {
+	0% { filter: drop-shadow(0px 0px 9px rgb(238, 204, 11));
+	}
+	25%{
+		filter: drop-shadow(0px 0px 6px rgb(238, 204, 11));
+	}
+	50%{
+		filter: drop-shadow(0px 0px 9px rgb(238, 204, 11));
+	}
+	75%{
+		filter: drop-shadow(0px 0px 14px rgb(238, 204, 11));
+	}
+	100%{
+		filter: drop-shadow(0px 0px 9px rgb(238, 204, 11));
+	}
 }
 
 .letterLogo{
@@ -195,14 +221,25 @@ h5{
 }
 
 .details{
-	margin: 0px 25px 25px 25px;
-	display: none;
+	/* margin: 0; */
+	z-index: -1;
+	display: block;
+	opacity: 0;
+	height: 0;
+	transition: height .4s ease-out;
 }
 
 .detailsShow{
 	margin: 0px 25px 25px 25px;
 	display: block;
-	/* transition: all 2s linear; */
+	opacity: 1;
+	height: 270px;
+	overflow: auto;
+	transition: height .4s ease-out;
+}
+
+.detailsShow::-webkit-scrollbar {
+	display: none;
 }
 
 .details h5, .detailsShow h5{
@@ -215,6 +252,23 @@ h5{
 	font-size: 16px;
 	margin: 0px;
 	overflow-wrap: break-word;
+}
+.details .info{
+	margin: 0;
+	transition: all .5s ease-out;
+}
+
+.detailsShow .info{
+	transition: all .5s ease-out;
+}
+
+.details p{
+	opacity: 0;
+}
+
+.detailsShow p{
+	opacity: 1;
+	transition: all .4s ease-out;
 }
 
 .category{
@@ -238,8 +292,8 @@ h5{
 	transform: translateZ(1px);
 	z-index: 1;
 	position: relative;
-	top: 50%;
-	left: 50%;
+	top: 45%;
+	left: 47%;
 	transition: opacity 2s;
 	vertical-align: middle;
 }

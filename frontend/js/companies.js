@@ -61,10 +61,16 @@ const addData = (companies) => {
 
         let flowerLogo = document.createElement('img')
         flowerLogo.classList.add("flowerLogo")
+        let flowerNum = `flower${index}`
+        flowerLogo.setAttribute("id", flowerNum)
         flowerLogo.src = './images/flower.png'
-        
+
         let flowerH5 = document.createElement('h5')
         flowerH5.textContent = companyData[0].flowers
+
+        // flowerLogo.addEventListener("click",()=>{
+        //     addFlower(flowerNum)
+        // })
 
         basic.appendChild(right)
         right.appendChild(flowers)
@@ -230,6 +236,65 @@ const run =  {
         for(let i = 0; i < containerChildren.length; i++) {
             compContainer.replaceChild(sortEls[i], containerChildren[i])
         }
+    },
+    sortTime: () => {
+        let sorted = companyDets.sort((a,b) => {
+            let aSurvival = Date.parse(a[1].lastModified.slice(0, 10)) - Date.parse(a[1].DateIncorporated ? a[1].DateIncorporated.slice(0, 10) : (a[1].dateIssued.slice(0, 10)))
+            let bSurvival = Date.parse(b[1].lastModified.slice(0, 10)) - Date.parse(b[1].DateIncorporated ? b[1].DateIncorporated.slice(0, 10) : (b[1].dateIssued.slice(0, 10)))
+            if(aSurvival && !bSurvival) {
+                return -1
+            } else if(!aSurvival && bSurvival) {
+                return 1
+            } else if(aSurvival > bSurvival) {
+                return -1
+            } else if(aSurvival < bSurvival) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+        let sortEls = addData(sorted)
+        for(let i = 0; i < containerChildren.length; i++) {
+            compContainer.replaceChild(sortEls[i], containerChildren[i])
+        }
+    },
+    sortSize: () => {
+        let sorted = companyDets.sort((a,b) => {
+            let aRange = a[1].employees_range
+            let bRange = b[1].employees_range
+
+            if(aRange && !bRange) {
+                return -1
+            } else if(!aRange && bRange) {
+                return 1
+            } else if(!aRange && !bRange) {
+                return 0
+            } else if(aRange == "> 10,000") {
+                return -1
+            } else if(bRange == "> 10,000") {
+                return 1
+            } else {
+                aRange = aRange.split("-");
+                bRange = bRange.split("-");
+                
+                if (aRange[0].includes(",")) aRange[0] = aRange[0].replace(',', "")
+                if (aRange[1].includes(",")) aRange[1] = aRange[1].replace(',', "")
+                if (bRange[0].includes(",")) bRange[0] = bRange[0].replace(',', "")
+                if (bRange[1].includes(",")) bRange[1] = bRange[1].replace(',', "")
+
+                if (aRange[1] > bRange[1]) {
+                    return -1
+                } else if(aRange[1] < bRange[1]) {
+                    return 1
+                } else {
+                    return 0
+                }
+            }
+        })
+        let sortEls = addData(sorted)
+        for(let i = 0; i < containerChildren.length; i++) {
+            compContainer.replaceChild(sortEls[i], containerChildren[i])
+        }
     }
 }
 
@@ -242,10 +307,10 @@ const sortHandler = () => {
             run.sortPop()
             break
         case "survival":
-            console.log("survival")
+            run.sortTime()
             break
         case "size":
-            console.log("size")
+            run.sortSize()
             break
     }
 }
