@@ -302,11 +302,9 @@ const sortHandler = () => {
             break
         case "survival":
             run.sortTime()
-            console.log("survival")
             break
         case "size":
             run.sortSize()
-            console.log("size")
             break
     }
 }
