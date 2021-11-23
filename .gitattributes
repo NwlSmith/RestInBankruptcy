@@ -1,0 +1,2 @@
+frontend/Unity/11.18/Build/11.18.wasm filter=lfs diff=lfs merge=lfs -text
+frontend/Unity/11.18/Build/11.18.data filter=lfs diff=lfs merge=lfs -text
