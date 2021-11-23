@@ -61,10 +61,16 @@ const addData = (companies) => {
 
         let flowerLogo = document.createElement('img')
         flowerLogo.classList.add("flowerLogo")
+        let flowerNum = `flower${index}`
+        flowerLogo.setAttribute("id", flowerNum)
         flowerLogo.src = './images/flower.png'
-        
+
         let flowerH5 = document.createElement('h5')
         flowerH5.textContent = companyData[0].flowers
+
+        // flowerLogo.addEventListener("click",()=>{
+        //     addFlower(flowerNum)
+        // })
 
         basic.appendChild(right)
         right.appendChild(flowers)

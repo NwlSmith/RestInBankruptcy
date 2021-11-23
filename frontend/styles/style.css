@@ -162,6 +162,7 @@ h5{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	z-index: 1;
 }
 
 .left{
@@ -179,6 +180,27 @@ h5{
 .flowerLogo{
 	height: 70px;
 	width: 50px;
+}
+
+.flowerLogo:hover{
+	animation: flower-glow infinite 2s;
+}
+
+@keyframes flower-glow {
+	0% { filter: drop-shadow(0px 0px 9px rgb(238, 204, 11));
+	}
+	25%{
+		filter: drop-shadow(0px 0px 6px rgb(238, 204, 11));
+	}
+	50%{
+		filter: drop-shadow(0px 0px 9px rgb(238, 204, 11));
+	}
+	75%{
+		filter: drop-shadow(0px 0px 14px rgb(238, 204, 11));
+	}
+	100%{
+		filter: drop-shadow(0px 0px 9px rgb(238, 204, 11));
+	}
 }
 
 .letterLogo{
@@ -200,6 +222,7 @@ h5{
 
 .details{
 	/* margin: 0; */
+	z-index: -1;
 	display: block;
 	opacity: 0;
 	height: 0;
