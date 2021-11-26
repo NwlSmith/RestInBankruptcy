@@ -3,17 +3,13 @@ import axios from 'axios'
 const getPackage = async (pkg, apikeystring) => {
     let pkgdata = await axios.get(pkg.packageLink + apikeystring).then(async (response) => {
         let currentPkg = response.data
-        if(currentPkg.courtState == "New York") {
-            let newPackage = {}
-            newPackage["title"] = currentPkg.title
-            newPackage["packageId"] = currentPkg.packageId
-            newPackage["dateIssued"] = currentPkg.dateIssued
-            newPackage["lastModified"] = currentPkg.lastModified
-            newPackage["courtState"] = currentPkg.courtState
-            return newPackage
-        } else {
-            return null
-        }
+        let newPackage = {}
+        newPackage["title"] = currentPkg.title
+        newPackage["packageId"] = currentPkg.packageId
+        newPackage["dateIssued"] = currentPkg.dateIssued
+        newPackage["lastModified"] = currentPkg.lastModified
+        newPackage["courtState"] = currentPkg.courtState
+        return newPackage
     })
     .catch(e => {
         return e
@@ -40,13 +36,16 @@ const filterPackages = async (pkgArray) => {
 const bolsterPackageData = async (pkgArray) => {
     for(let pkg of pkgArray) {
         try {
-            let nyData = await axios.get(`https://data.ny.gov/resource/n9v6-gdp6.json?$where=current_entity_name like '%25${pkg.title.toUpperCase().replace("&", "%26").replace(" ", "%25").replace(","|"LLC"|"CORP"|"CO"|"INC", "")}%25'`, {
-                headers: {
-                    "X-App-Token": process.env.NY_DATA_KEY
-                }
-            })
-            let ORBData = await axios.get(`https://api.orb-intelligence.com/3/match/?api_key=${process.env.ORB_KEY}&name=${pkg.title}&country=US&state=NY`)
-            if(nyData.data.length > 0) {
+            let nyData
+            if(pkg.courtState == "New York") {
+                nyData = await axios.get(`https://data.ny.gov/resource/n9v6-gdp6.json?$where=current_entity_name like '%25${pkg.title.toUpperCase().replace("&", "%26").replace(" ", "%25").replace(","|"LLC"|"CORP"|"CO"|"INC", "")}%25'`, {
+                    headers: {
+                        "X-App-Token": process.env.NY_DATA_KEY
+                    }
+                })
+            }
+            let ORBData = await axios.get(`https://api.orb-intelligence.com/3/match/?api_key=${process.env.ORB_KEY}&name=${pkg.title}&country=US&state=${pkg.courtState.replace(" ", "%20")}`)
+            if(nyData && nyData.data.length > 0) {
                 pkg["DateIncorporated"] = nyData.data[0].initial_dos_filing_date
             }
             if(ORBData.data.results[0]) {
