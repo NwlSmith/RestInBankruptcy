@@ -407,6 +407,10 @@ img.close{
 	align-items: center;
 }
 
+.flowerRecieved img{
+	width: 50px;
+}
+
 .flowerNum{
 	margin: auto;
 	background-color: #EFFFFA;
