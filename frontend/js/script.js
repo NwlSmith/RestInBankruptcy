@@ -15,3 +15,4 @@ function expand(arrowIndex, detailNum){
 		arrow.classList.add("arrow")
 	}
 }
+
