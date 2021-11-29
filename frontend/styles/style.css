@@ -430,6 +430,50 @@ img.close{
 	font-weight: bold;
 }
 
+
+
+.commentDetails{
+	position: fixed; 
+  	/*display: none;*/
+  	top: 10%;
+  	left: 15%;
+	background-color: #439388;
+	border-radius: 30px;
+	width: 70%; 
+  	height: 80%; 
+  	z-index: 4; 
+  	text-align: center;
+  	padding: 20px;
+}
+
+.commentDetails h1{
+	font-size: 40px;
+	margin: 20px 0px 10px 0px;
+}
+
+.existingComments{
+	background-color: #439388;
+	border: 2px solid #EFFFFA;
+	border-radius: 30px;
+	margin: 10px;
+	height: 50%;
+	overflow: scroll;
+}
+
+.comment{
+	border-radius: 10px;
+	margin: 10px 20px;
+	padding: 5px 20px;
+	background-color: #EFFFFA;
+	text-align: left;
+	color: #1B2C4A;
+}
+
+.comment p{
+	line-height: 30px;
+	margin: 0px;
+}
+
 @media only screen and (max-width: 1400px){
 	body{
 		margin: 30px 50px 120px 50px;
