@@ -388,6 +388,7 @@ img.close{
 }
 
 
+/*flower details*/
 .flowerDetails h2{
 	margin: 0px 0px 0px 20px;
 }
@@ -429,6 +430,83 @@ img.close{
 	font-size: 36px;
 	font-weight: bold;
 }
+
+
+/*comment details*/
+.commentDetails{
+	position: fixed; 
+  	/*display: none;*/
+  	top: 10%;
+  	left: 15%;
+	background-color: #439388;
+	border-radius: 30px;
+	width: 70%; 
+  	height: 80%; 
+  	z-index: 4; 
+  	text-align: right;
+  	padding: 2%;
+}
+
+.commentDetails h1{
+	text-align: center;
+	font-size: 40px;
+	margin: 0px
+}
+
+.existingComments{
+	background-color: #439388;
+	border: 2px solid #EFFFFA;
+	border-radius: 30px;
+	margin: 10px;
+	height: 48%;
+	overflow: scroll;
+}
+
+.comment{
+	border-radius: 10px;
+	margin: 10px 20px;
+	padding: 8px 20px;
+	background-color: #EFFFFA;
+	text-align: left;
+	color: #1B2C4A;
+}
+
+.comment p{
+	line-height: 30px;
+	margin: 0px;
+}
+
+.commentDetails h2{
+	text-align: center;
+	font-size: 24px;
+	margin: 20px 0px 10px 0px
+}
+
+
+
+textarea{
+	padding: 20px;
+	height: 13%;
+	width: 95%;
+	background-color: #439388;
+	border: 2px solid #EFFFFA;
+	border-radius: 30px;
+	color: #EFFFFA;
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+}
+
+.commentDetails button{
+	width: 100px;
+	height: 40px;
+	font-size: 16px;
+	margin: 5px;
+}
+
+
+
+
+
 
 @media only screen and (max-width: 1400px){
 	body{
