@@ -34,6 +34,10 @@ a{
 	text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.72);
 }
 
+.dataLinks a:hover {
+	text-decoration: underline; 
+}
+
 nav a:hover{
 	border-bottom: 2px solid #EFFFFA;
 }
