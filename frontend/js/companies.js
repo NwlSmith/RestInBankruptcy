@@ -1,4 +1,4 @@
-const fetchURL = 'http://18.220.179.6:8080/dynamoDB/docs/'
+const fetchURL = 'http://3.144.16.89:8080/dynamoDB/docs/'
 
 const compContainer = document.getElementById("list-container")
 const containerChildren = compContainer.children
