@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | RestInBankruptcy-Unity</title>
+
+    <link rel="stylesheet" href="../../styles/style.css">
+    <style>
+			body{
+				height: 100%;
+				background-color: rgba(27,44,74,1);
+				background-image: linear-gradient(to bottom right, rgba(27,44,74,1), rgba(67,147,136,1) );
+				background-attachment:fixed;
+				height:100%;
+			}
+		</style>
+  </head>
+  <body style="text-align: center">
+    <header style="margin-bottom: 1em;">
+			<a href="../../index.html"><img src="../../images/ghost.png" class="logo"></a>
+			<nav>
+				<a href="../../about.html">About</a>
+				<a href="../../companies.html">Companies</a>
+				<button style="background-color: #EFFFFA; color: #1B2C4A;">Enter Graveyard</button>
+			</nav>
+		</header>
+    <canvas id="unity-canvas" width=960 height=600 style="width: 960px; height: 600px; background: #000000"></canvas>
+    <script src="Build/11.18.loader.js"></script>
+    <script>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/11.18.data",
+        frameworkUrl: "Build/11.18.framework.js",
+        codeUrl: "Build/11.18.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "RestInBankruptcy-Unity",
+        productVersion: "0.1",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
+    </script>
+  </body>
+</html>
