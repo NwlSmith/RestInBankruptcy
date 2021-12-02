@@ -114,6 +114,10 @@ p{
 	line-height: 34px;
 }
 
+p a{
+	text-decoration: underline;
+}
+
 label{
 	margin-right: 20px;
 	font-family: 'Chakra Petch', sans-serif;
