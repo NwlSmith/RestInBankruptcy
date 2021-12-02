@@ -5,9 +5,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | RestInBankruptcy-Unity</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="../../styles/style.css">
       <link rel="stylesheet" href="TemplateData/style.css">
-      <style>
+
+    <link rel="stylesheet" media="only screen and (max-width: 800px)" href="../../styles/mobile.css"> 
+    <!-- Media query for medium browser width -->
+    <link rel="stylesheet" media="only screen and (min-width: 801px)" href="../../styles/tablet.css">
+    <!-- Media query for full browser width -->
+    <link rel="stylesheet" media="only screen and (min-width: 1400px)" href="../../styles/desktop.css">
+
+
+    <style>
 			body{
 				height: 100%;
 				background-color: rgba(27,44,74,1);
@@ -27,7 +34,7 @@
 			</nav>
 		</header>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600></canvas>
+      <canvas id="unity-canvas" style=" width:100%; height: auto; background: #000000"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -42,6 +49,7 @@
         <div id="unity-build-title">RestInBankruptcy-Unity</div>
       </div>
     </div>
+    <!--<script src="Build/11.18.loader.js"></script>-->
     <script>
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/11.18.loader.js";

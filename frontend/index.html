@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="styles/style.css">
+		<!-- Media query for narrow browser width -->
+		<link rel="stylesheet" media="only screen and (max-width: 800px)" href="styles/mobile.css">	
+		<!-- Media query for medium browser width -->
+		<link rel="stylesheet" media="only screen and (min-width: 801px)" href="styles/tablet.css">
+		<!-- Media query for full browser width -->
+		<link rel="stylesheet" media="only screen and (min-width: 1400px)" href="styles/desktop.css">
+		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 
 		<style>
 			body{
-				background-color: rgba(27,44,74,1);
-				background-image: url("images/home.jpg");
-				background-repeat: no-repeat;
-				background-size: cover;
-				overflow: hidden;
+				background-color: #202e50;
 			}
 		</style>
 	</head>
@@ -26,9 +28,14 @@
 				<button><a href="Unity/11.18/index.html" style="all: unset;">Enter Graveyard</a></button>
 			</nav>
 		</header>
-		<div class = "left">
+		<div class="home-content">
+			<div class = "home-left">
 				<h1>Rest In Bankruptcy</h1>
-				<h3>Rest In Bankruptcy (RIB) is a artistic, real-time representation of every company in the US that has declared chapter 11 bankruptcy. </h3>
+				<h3>Rest In Bankruptcy (RIB) is a artistic, real-time representation of every company in the US that has declared chapter 11 and chapter 7 bankruptcy.</h3>
+			</div>
+			<div class = "home-right">
+				<img src=images/home.jpg width="100%">
+			</div>
 		</div>
 	</body>
 </html>
