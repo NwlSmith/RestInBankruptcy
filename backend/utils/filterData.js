@@ -21,7 +21,7 @@ const filterPackages = async (pkgArray) => {
     let filteredpackages = []
     for(let pkg of pkgArray) {
         let id = pkg.packageId.split("-").includes("bk")
-        let business = /\bllc\b|\bcorp\b|\bco\b|\binc\b/i.test(pkg.title)
+        let business = /\bllc\b|\bcorp\b|\bco\b|\binc\b|\bltd\b|\blimited\b|\bcompany\b|\blp\b|\bn.a.\b|\binc\b|\bfoundation\b|\bbank\b/i.test(pkg.title)
         let apistring = "?api_key=" + process.env.GOVAPIKEY
         if(id && business) {
             let getdata = getPackage(pkg, apistring)
