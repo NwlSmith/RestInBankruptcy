@@ -44,6 +44,8 @@ dbRouter.post('/bankruptcies/:earliestdate?/:latestdate?', async (req, res) => {
                             })
                             promises.push(promise)
                         }
+                    } else {
+                        console.log("nothing")
                     }
                 }).catch(e => {
                     res.status(e.response.status).send(e.response.data)
@@ -56,9 +58,13 @@ dbRouter.post('/bankruptcies/:earliestdate?/:latestdate?', async (req, res) => {
         })
         await timer(70000)
     }
-    Promise.all(promises).then(() => {
-        res.status(200).send("OK")
-    })
+    if(promises.length <= 0) {
+        res.status(404).send("Nothing was found")
+    } else {
+        Promise.all(promises).then(() => {
+            res.status(200).send("OK")
+        })
+    }
 })
 
 // create single document in Table = tableName
