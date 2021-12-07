@@ -1,0 +1,37 @@
+@import 'desktop.css';
+
+body{
+	margin: 30px 50px 120px 50px;
+	background-color: red;
+}
+h1{
+	font-size: 60px;
+	line-height: 70px;
+}
+
+h2{
+	margin-top: 60px;
+	font-size: 24px;
+}
+
+h3{
+	font-size: 20px;
+	line-height: 30px;
+}
+
+p{
+	font-size: 16px;
+	line-height: 26px;
+}
+
+.logo{
+	width: 60px;
+}
+
+nav{
+	width: 50%;
+}
+
+a{
+	font-size: 16px;
+}
