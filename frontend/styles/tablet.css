@@ -35,3 +35,80 @@ nav{
 a{
 	font-size: 16px;
 }
+
+.flowerLogo{
+	height: 60px;
+	width: 40px;
+}
+
+.letterLogo{
+	height: 55px;
+	width: 55px;
+}
+
+h4{
+	font-size: 18px;
+}
+
+h5{
+	font-size: 16px;
+}
+
+.company{
+	margin-top: 20px;
+}
+
+.info{
+	margin: 10px 0px 0px 0px;
+}
+
+.category {
+    width: 20%;
+}
+
+.arrow, .arrowUp{
+    width: 20px;
+    height: 20px;
+}
+
+.flowerDetails {
+    top: 33%;
+    left: 15%;
+    width: 70%;
+    height: 34%;
+}
+
+.flowerRecieved img {
+    width: 40px;
+}
+
+.flowerDetails h1 {
+    font-size: 30px;
+}
+
+.flowerNumIterator p {
+    font-size: 30px;
+}
+
+img.closeImage {
+	width: 20px;
+}
+
+.commentDetails {
+    top: 25%;
+    left: 15%;
+    width: 70%;
+    height: 50%;
+}
+
+.commentDetails h1 {
+	font-size: 30px;
+}
+
+textarea {
+    width: 92%;
+}
+
+.commentDetails button {
+    margin: 10px;
+}

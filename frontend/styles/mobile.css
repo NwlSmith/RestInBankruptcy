@@ -54,3 +54,133 @@ button{
     height: 30px;
     font-size: 10px;
 }
+
+label{
+    font-size: 18px;
+}
+
+select{
+	width: 120px;
+	height: 30px;
+	font-size: 12px;
+}
+
+#list-container {
+    margin-top: 20px;
+}
+
+h4{
+	font-size: 12px;
+}
+
+.flowerLogo {
+    height: 42px;
+    width: 30px;
+}
+
+.letterLogo {
+    height: 35px;
+    width: 35px;
+}
+
+.flowers, .comments {
+    margin: 0px;
+}
+
+h5{
+	margin-left: 10px;
+	margin-right: 20px;
+}
+
+.right {
+    margin: 0px 15px 0px 0px;
+}
+
+.arrow, .arrowUp {
+    width: 15px;
+    height: 15px;
+}
+
+h5 {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.category {
+    width: 40%;
+}
+
+.detailsShow p {
+	font-size: 12px;
+}
+
+.flowerDetails {
+    top: 35%;
+    left: 10%;
+    width: 80%;
+    height: 30%;
+}
+
+img.closeImage {
+    width: 15px;
+    top: 20px;
+    right: 25px;
+}
+
+.flowerRecieved {
+    margin: 30px 0px 0px 30px;
+}
+
+.flowerRecieved img {
+    width: 30px;
+}
+
+.flowerDetails h2{
+    font-size: 18px;
+}
+
+.flowerDetails h1 {
+    font-size: 22px;
+    margin: 15px 0px 0px 0px;
+}
+
+.flowerNumIterator {
+	height: 18%;
+	margin-bottom: 20px;
+}
+
+.flowerNumIterator p {
+    font-size: 20px;
+}
+
+.commentDetails {
+    top: 20%;
+    left: 10%;
+    width: 80%;
+    height: 60%;
+}
+
+.commentDetails h1 {
+    font-size: 22px;
+}
+
+.commentDetails h2 {
+    font-size: 18px;
+}
+
+.comment {
+    margin: 10px 10px;
+    padding: 5px 10px;
+}
+
+textarea {
+    height: 13%;
+    width: 84%;
+}
+
+.commentDetails button {
+    width: 80px;
+    height: 32px;
+    font-size: 14px;
+    margin: 10px
+}

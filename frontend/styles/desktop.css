@@ -275,7 +275,6 @@ h5{
 	margin: 0px 25px 25px 25px;
 	display: block;
 	opacity: 1;
-	height: 270px;
 	overflow: auto;
 	transition: height .4s ease-out;
 }
@@ -302,6 +301,7 @@ h5{
 
 .detailsShow .info{
 	transition: all .5s ease-out;
+	align-items: flex-syary;
 }
 
 .details p{
@@ -324,7 +324,7 @@ h5{
 .info{
 	display: flex;
 	justify-content: start;
-	align-items: center;
+	align-items: flex-start;
 	margin: 25px 0px 0px 0px;
 }
 
@@ -464,7 +464,6 @@ img.closeImage{
 /*comment details*/
 .commentDetails{
 	position: fixed; 
-  	/*display: none;*/
   	top: 10%;
   	left: 15%;
 	background-color: #439388;
