@@ -39,6 +39,9 @@ const addData = (companies) => {
         let company = document.createElement('div')
         company.classList.add("company")
 
+
+        //main info div
+        
         let basic = document.createElement('div')
         basic.classList.add("basic")
 
@@ -68,9 +71,9 @@ const addData = (companies) => {
         let flowerH5 = document.createElement('h5')
         flowerH5.textContent = companyData[0].flowers
 
-        // flowerLogo.addEventListener("click",()=>{
-        //     addFlower(flowerNum)
-        // })
+        flowerLogo.addEventListener("click",()=>{
+            expandFlower(overlay, index)
+        })
 
         basic.appendChild(right)
         right.appendChild(flowers)
@@ -87,6 +90,10 @@ const addData = (companies) => {
 
         let letterH5 = document.createElement('h5')
         letterH5.textContent = companyData[0].comments.length
+
+        letterLogo.addEventListener("click",()=>{
+            expandComment(overlay, index)
+        })
 
         right.appendChild(comments)
         comments.appendChild(letterLogo)
@@ -105,6 +112,8 @@ const addData = (companies) => {
         
         right.appendChild(arrow)
         
+        //expanded info div
+
         let details = document.createElement('div')
         details.classList.add("details")
         details.setAttribute("id", detailNum)
@@ -195,6 +204,183 @@ const addData = (companies) => {
         info4.appendChild(content4)
         content4.appendChild(content4P)
 
+        //overlay
+
+        let overlay = document.createElement('div')
+        overlay.classList.add("overlayOFF")
+
+        let flowerDetails = document.createElement('div')
+        flowerDetails.classList.add("flowerDetailsHide")
+        let flowerDetailsNum = `flowerDetails${index}`
+        flowerDetails.setAttribute("id", flowerDetailsNum)
+        
+        company.appendChild(overlay)
+        overlay.appendChild(flowerDetails)
+
+        let flowerCloseImage = document.createElement('img')
+        flowerCloseImage.classList.add("closeImage")
+
+        let flowerCloseNum = `flowerClose${index}`
+        flowerCloseImage.setAttribute("id", flowerCloseNum)
+        flowerCloseImage.src = './images/close.png'
+
+        flowerCloseImage.addEventListener("click",()=>{
+            hideFlower(overlay, index)
+        })
+
+        let flowerRecieved = document.createElement('div')
+        flowerRecieved.classList.add("flowerRecieved")
+
+        let flowerImage = document.createElement('img')
+        flowerImage.classList.add("flowerImage")
+        flowerImage.src = './images/flower.png'
+
+        let flowerRecievedH2 = document.createElement('h2')
+        flowerRecievedH2.textContent = "Flowers recieved: "
+
+        flowerDetails.appendChild(flowerCloseImage)
+        flowerDetails.appendChild(flowerRecieved)
+        flowerRecieved.appendChild(flowerImage)
+        flowerRecieved.appendChild(flowerRecievedH2)
+
+        let flowerDetailsH1 = document.createElement('h1')
+        flowerDetailsH1.textContent = "Send Flowers"
+
+
+        let flowerNumIterator = document.createElement('div')
+        flowerNumIterator.classList.add("flowerNumIterator")
+
+        let count = 0;
+        let flowerNum1 = document.createElement('p')
+        flowerNum1.textContent = "-"
+
+        let flowerNum2 = document.createElement('p')
+        flowerNum2.textContent = count;
+
+        let flowerNum3 = document.createElement('p')
+        flowerNum3.textContent = "+"
+
+        flowerNum1.addEventListener("click",()=>{
+            if (count > 1) count--;
+            flowerNum2.textContent = count;
+        })
+
+        flowerNum3.addEventListener("click",()=>{
+            if (count < 10)count++;
+            flowerNum2.textContent = count;
+        })
+
+        let flowerSendButton = document.createElement('button')
+        flowerSendButton.textContent = "Send"
+        let buttonNum = `flowerSendButton${index}`
+        flowerSendButton.setAttribute("id", buttonNum)
+
+        flowerSendButton.addEventListener("click",()=>{
+            let pkgId = `${companyData[1].packageId}`
+            addFlower(pkgId, count)
+
+            flowerH5.textContent = Number(flowerH5.textContent) + count
+            hideFlower(overlay, index)
+        })
+
+        flowerDetails.appendChild(flowerDetailsH1)
+        flowerDetails.appendChild(flowerNumIterator)
+        flowerNumIterator.appendChild(flowerNum1)
+        flowerNumIterator.appendChild(flowerNum2)
+        flowerNumIterator.appendChild(flowerNum3)
+        flowerDetails.appendChild(flowerSendButton)
+
+        let commentDetails = document.createElement('div')
+        commentDetails.classList.add("commentDetailsHide")
+        let commentDetailsNum = `commentDetails${index}`
+        commentDetails.setAttribute("id", commentDetailsNum)
+        
+        overlay.appendChild(commentDetails)
+
+        let commentCloseImage = document.createElement('img')
+        commentCloseImage.classList.add("closeImage")
+
+        let commentCloseNum = `commentClose${index}`
+        commentCloseImage.setAttribute("id", commentCloseNum)
+        commentCloseImage.src = './images/close.png'
+
+        commentCloseImage.addEventListener("click",()=>{
+            hideComment(overlay, index)
+        })
+
+        let commentsH1 = document.createElement('h1')
+        commentsH1.textContent = "Comments"
+
+        let exisitingComments = document.createElement('div')
+        exisitingComments.classList.add("existingComments")
+
+        commentDetails.appendChild(commentCloseImage)
+        commentDetails.appendChild(commentsH1)
+        commentDetails.appendChild(exisitingComments)
+
+        for (let i = 0; i < companyData[0].comments.length; i++){
+            let exisitingCommentsComment = document.createElement('div')
+            exisitingCommentsComment.classList.add("comment")
+
+            let commentsP = document.createElement('p')
+            commentsP.textContent = `${companyData[0].comments[i]}`
+            
+            exisitingComments.appendChild(exisitingCommentsComment)
+            exisitingCommentsComment.appendChild(commentsP)
+        }
+        
+
+        let commentsH2 = document.createElement('h2')
+        commentsH2.textContent = "Leave your comment"
+
+        let commentsTextArea = document.createElement('textarea')
+        
+        let commentsTANum = `commentsTA${index}`
+        commentsTextArea.setAttribute("id", commentsTANum)
+        
+        let commentSendButton = document.createElement('button')
+        commentSendButton.textContent = "Send"
+        let commentButtonNum = `commentSendButton${index}`
+        commentSendButton.setAttribute("id", commentButtonNum)
+
+        commentSendButton.addEventListener("click",()=>{
+            let comment = document.getElementById(commentsTANum).value.trim();
+            let pkgId = `${companyData[1].packageId}`
+            if(comment != ''){
+                addComment(pkgId, comment)
+
+                let exisitingCommentsComment = document.createElement('div')
+                exisitingCommentsComment.classList.add("comment")
+
+                let commentsP = document.createElement('p')
+                commentsP.textContent = `${comment}`
+                
+                exisitingComments.appendChild(exisitingCommentsComment)
+                exisitingCommentsComment.appendChild(commentsP)
+
+                letterH5.textContent = Number(letterH5.textContent) + 1
+                document.getElementById(commentsTANum).value = ""
+            }
+            
+        })
+
+        commentDetails.appendChild(commentsH2)
+        commentDetails.appendChild(commentsTextArea)
+        commentDetails.appendChild(commentSendButton)
+
+
+        // <!-- <div class="commentDetails">
+        //     <img class="close" src="images/close.png">
+        //     <h1>Comments</h1>
+        //     <div class="existingComments">
+        //         <div class="comment">
+        //              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </p>
+        //          </div>
+        //     </div>
+        //     <h2>Leave your comment</h2>
+        //     <textarea></textarea>
+        //     <button>Send</button>
+        // </div> -->
         elements.push(company)
     })
     return elements
