@@ -17,14 +17,11 @@
 
 
     <style>
-      html {
-        height: 100%;
-      }
 			body{
-        height: 100%;
-				background-color: rgba(27,44,74,1);
+        background-color: rgba(27,44,74,1);
 				background-image: linear-gradient(to bottom right, rgba(27,44,74,1), rgba(67,147,136,1) );
 				background-attachment:fixed;
+				height:100%;
 			}
 		</style>
   </head>
@@ -37,22 +34,31 @@
 				<button style="background-color: #EFFFFA; color: #1B2C4A;">Enter Graveyard</button>
 			</nav>
 		</header>
-    <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" style=" width:100%; height: auto; background: #000000"></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
+    <div style="margin-top: 50px;">
+      <div id="unity-container" class="unity-desktop">
+        <canvas id="unity-canvas" ></canvas>
+        <div id="unity-loading-bar">
+          <div id="unity-logo"></div>
+          <div id="unity-progress-bar-empty">
+            <div id="unity-progress-bar-full"></div>
+          </div>
+        </div>
+        <div id="unity-mobile-warning"> 
+          <p> WebGL builds are not supported on mobile devices. </p>
+        </div>
         </div>
       </div>
-      <div id="unity-mobile-warning">
-        WebGL builds are not supported on mobile devices.
-      </div>
       <div id="unity-footer">
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">RestInBankruptcy-Unity</div>
+        <div class = left>
+          <div id="unity-webgl-logo"></div>
+        </div>
+        <div class = right>
+          <div id="unity-build-title"><p>RestInBankruptcy-Unity</p></div>
+          <div id="unity-fullscreen-button"></div>
+        </div>
       </div>
     </div>
+    
     <!--<script src="Build/11.18.loader.js"></script>-->
     <script>
       var buildUrl = "Build";
