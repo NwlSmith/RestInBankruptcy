@@ -243,19 +243,38 @@ const addData = (companies) => {
         let flowerNumIterator = document.createElement('div')
         flowerNumIterator.classList.add("flowerNumIterator")
 
+        let count = 0;
         let flowerNum1 = document.createElement('p')
         flowerNum1.textContent = "-"
 
         let flowerNum2 = document.createElement('p')
-        flowerNum2.textContent = "1"
+        flowerNum2.textContent = count;
 
         let flowerNum3 = document.createElement('p')
         flowerNum3.textContent = "+"
+
+        flowerNum1.addEventListener("click",()=>{
+            if (count > 1) count--;
+            flowerNum2.textContent = count;
+        })
+
+        flowerNum3.addEventListener("click",()=>{
+            if (count < 11)count++;
+            flowerNum2.textContent = count;
+        })
 
         let flowerSendButton = document.createElement('button')
         flowerSendButton.textContent = "Send"
         let buttonNum = `flowerSendButton${index}`
         flowerSendButton.setAttribute("id", buttonNum)
+
+        flowerSendButton.addEventListener("click",()=>{
+            let pkgId = `${companyData[1].packageId}`
+            addFlower(pkgId, count)
+
+            flowerH5.textContent = Number(flowerH5.textContent) + count
+            hideFlower(overlay, index)
+        })
 
         flowerDetails.appendChild(flowerDetailsH1)
         flowerDetails.appendChild(flowerNumIterator)
@@ -263,9 +282,6 @@ const addData = (companies) => {
         flowerNumIterator.appendChild(flowerNum2)
         flowerNumIterator.appendChild(flowerNum3)
         flowerDetails.appendChild(flowerSendButton)
-
-        
-///////////////////////////
 
         let commentDetails = document.createElement('div')
         commentDetails.classList.add("commentDetailsHide")
@@ -291,27 +307,54 @@ const addData = (companies) => {
         let exisitingComments = document.createElement('div')
         exisitingComments.classList.add("existingComments")
 
-        let exisitingCommentsComment = document.createElement('div')
-        exisitingCommentsComment.classList.add("comment")
-
-        let commentsP = document.createElement('p')
-        commentsP.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. "
-
         commentDetails.appendChild(commentCloseImage)
         commentDetails.appendChild(commentsH1)
         commentDetails.appendChild(exisitingComments)
-        exisitingComments.appendChild(exisitingCommentsComment)
-        exisitingCommentsComment.appendChild(commentsP)
+
+        for (let i = 0; i < companyData[0].comments.length; i++){
+            let exisitingCommentsComment = document.createElement('div')
+            exisitingCommentsComment.classList.add("comment")
+
+            let commentsP = document.createElement('p')
+            commentsP.textContent = `${companyData[0].comments[i]}`
+            
+            exisitingComments.appendChild(exisitingCommentsComment)
+            exisitingCommentsComment.appendChild(commentsP)
+        }
+        
 
         let commentsH2 = document.createElement('h2')
         commentsH2.textContent = "Leave your comment"
 
         let commentsTextArea = document.createElement('textarea')
+        let commentsTANum = `commentsTA${index}`
+        commentsTextArea.setAttribute("id", commentsTANum)
         
         let commentSendButton = document.createElement('button')
         commentSendButton.textContent = "Send"
         let commentButtonNum = `commentSendButton${index}`
         commentSendButton.setAttribute("id", commentButtonNum)
+
+        commentSendButton.addEventListener("click",()=>{
+            let comment = document.getElementById(commentsTANum).value.trim();
+            let pkgId = `${companyData[1].packageId}`
+            if(comment != ''){
+                addComment(pkgId, comment)
+
+                let exisitingCommentsComment = document.createElement('div')
+                exisitingCommentsComment.classList.add("comment")
+
+                let commentsP = document.createElement('p')
+                commentsP.textContent = `${comment}`
+                
+                exisitingComments.appendChild(exisitingCommentsComment)
+                exisitingCommentsComment.appendChild(commentsP)
+
+                letterH5.textContent = Number(letterH5.textContent) + 1
+                document.getElementById(commentsTANum).value = ""
+            }
+            
+        })
 
         commentDetails.appendChild(commentsH2)
         commentDetails.appendChild(commentsTextArea)
