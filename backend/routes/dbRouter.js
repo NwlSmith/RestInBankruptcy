@@ -9,62 +9,46 @@ const dbRouter = express.Router()
 
 const apiKey = "&api_key=" + process.env.GOVAPIKEY
 
-const timer = (ms) => new Promise(res => setTimeout(res, ms))
-
-
 // create a series of bankruptcies in Table = tableName
 dbRouter.post('/bankruptcies/:earliestdate?/:latestdate?', async (req, res) => {
-    let promises = []
-    for(let i = 0; i <= parseInt(req.query.batchCount); i += 100) {
-        console.log(i)
-        axios.get(`https://api.govinfo.gov/published/${req.params.earliestdate || "2020-01-01"}T12%3A00%3A00Z${req.params.latestdate ? ("/" + req.params.latestdate + "T12%3A00%3A00Z") : ""}?offset=${i}&pageSize=100&courtType=Bankruptcy&collection=USCOURTS` + apiKey)
-        .then(response => {
-            filterPackages(response.data.packages).then(filtered => {
-                let newitems = []
-                for(let item of filtered) {
-                    if(item) {
-                        newitems.push(item)
-                    }
+    axios.get(`https://api.govinfo.gov/published/${req.params.earliestdate || "2020-01-01"}T12%3A00%3A00Z${req.params.latestdate ? ("/" + req.params.latestdate + "T12%3A00%3A00Z") : ""}?offset=${req.query.offset || 0}&pageSize=${req.query.pageSize || 100}&courtType=Bankruptcy&collection=USCOURTS` + apiKey)
+    .then(response => {
+        filterPackages(response.data.packages).then(filtered => {
+            let newitems = []
+            for(let item of filtered) {
+                if(item) {
+                    newitems.push(item)
                 }
-                bolsterPackageData(newitems).then(result => {
-                    if(result.length > 0) {
-                        for(let item of result) {
-                            let graveObj = {
-                                "packageId": item.packageId,
-                                "comments": [],
-                                "flowers": 0
-                            }
-                            let promise = putDoc(req.body.tableName, item).catch(e => {
-                                res.status(e.$metadata.httpStatusCode).send(e.message)
-                                return
-                            })
-                            putDoc("GravestoneOfferings", graveObj).catch(e => {
-                                res.status(e.$metadata.httpStatusCode).send(e.message)
-                                return 
-                            })
-                            promises.push(promise)
+            }
+            bolsterPackageData(newitems).then(result => {
+                if(result.length > 0) {
+                    let promises = []
+                    for(let item of result) {
+                        let graveObj = {
+                            "packageId": item.packageId,
+                            "comments": [],
+                            "flowers": 0
                         }
-                    } else {
-                        console.log("nothing")
+                        let promise = putDoc(req.body.tableName, item).catch(e => {
+                            res.status(e.$metadata.httpStatusCode).send(e.message) 
+                        })
+                        putDoc("GravestoneOfferings", graveObj).catch(e => {
+                            res.status(e.$metadata.httpStatusCode).send(e.message) 
+                        })
+                        promises.push(promise)
                     }
-                }).catch(e => {
-                    res.status(e.response.status).send(e.response.data)
-                    return
-                })
+                    Promise.all(promises).then(() => {
+                        res.status(200).send("OK")
+                    })
+                } else {
+                    res.status(404).send("Nothing was found.")
+                }
             })
-        }).catch(e => {
-            res.status(e.response.status).send(e.response.data)
-            return
         })
-        await timer(70000)
-    }
-    if(promises.length <= 0) {
-        res.status(404).send("Nothing was found")
-    } else {
-        Promise.all(promises).then(() => {
-            res.status(200).send("OK")
-        })
-    }
+    }).catch(e => {
+        res.status(e.response.status).send(e.response.data)
+    })
+    
 })
 
 // create single document in Table = tableName
