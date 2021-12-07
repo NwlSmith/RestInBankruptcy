@@ -382,10 +382,14 @@ h5{
   	bottom: 0;
   	background-color: rgba(0,0,0,0.5); 
   	z-index: 2; 
+	opacity: 1;
+	transition: opacity 0.15s ease-out;
 }
 
 .overlayOFF{
-	display: none;
+	opacity: 0;
+	height: 0;
+	z-index: -1;
 }
 
 .flowerDetails{
@@ -399,24 +403,10 @@ h5{
   	height: 50%; 
   	z-index: 3; 
   	text-align: center;
-	  
-	/* transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; */
-	/* transform: scale(1.0) */
-	opacity: 1;
-	/* transform: scale(1);
-	transition: all .4s ease-in; */
-	/* transition: height .4s ease-out; */
 }
 
 .flowerDetailsHide{
-	opacity: 0;
-	/* z-index: -1;
-	height: 0;
-	transform: scale(1);
-	width: 100%;
-	height: 100%;
-	transition: all .4s ease-in; */
-	/* transition: height .4s ease-out; */
+	display: none; 
 }
 
 img.closeImage{
@@ -427,7 +417,7 @@ img.closeImage{
 }
 
 
-/*flower details*/
+/* flower details */
 .flowerDetails h2{
 	margin: 0px 0px 0px 20px;
 }
@@ -537,6 +527,7 @@ textarea{
 	color: #EFFFFA;
 	font-family: 'Lato', sans-serif;
 	font-size: 20px;
+	resize: none;
 }
 
 .commentDetails button{
