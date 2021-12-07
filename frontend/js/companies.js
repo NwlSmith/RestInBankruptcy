@@ -39,6 +39,9 @@ const addData = (companies) => {
         let company = document.createElement('div')
         company.classList.add("company")
 
+
+        //main info div
+        
         let basic = document.createElement('div')
         basic.classList.add("basic")
 
@@ -109,6 +112,8 @@ const addData = (companies) => {
         
         right.appendChild(arrow)
         
+        //expanded info div
+
         let details = document.createElement('div')
         details.classList.add("details")
         details.setAttribute("id", detailNum)
@@ -199,6 +204,8 @@ const addData = (companies) => {
         info4.appendChild(content4)
         content4.appendChild(content4P)
 
+        //overlay
+
         let overlay = document.createElement('div')
         overlay.classList.add("overlayOFF")
 
@@ -259,7 +266,7 @@ const addData = (companies) => {
         })
 
         flowerNum3.addEventListener("click",()=>{
-            if (count < 11)count++;
+            if (count < 10)count++;
             flowerNum2.textContent = count;
         })
 
@@ -327,6 +334,7 @@ const addData = (companies) => {
         commentsH2.textContent = "Leave your comment"
 
         let commentsTextArea = document.createElement('textarea')
+        
         let commentsTANum = `commentsTA${index}`
         commentsTextArea.setAttribute("id", commentsTANum)
         

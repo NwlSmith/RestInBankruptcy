@@ -53,8 +53,8 @@ function expandFlower(overlay, index){
 	var flowerDetails = document.getElementById(`flowerDetails${index}`);
 	// var close = document.getElementById('flowerCloseNum${index}');
 
-	flowerDetails.classList.add("flowerDetails")
 	flowerDetails.classList.remove("flowerDetailsHide")
+	flowerDetails.classList.add("flowerDetails")
 	overlay.classList.add("overlay")
 	overlay.classList.remove("overlayOFF")
 }
