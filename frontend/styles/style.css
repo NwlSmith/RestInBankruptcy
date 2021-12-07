@@ -369,6 +369,14 @@ h5{
   	bottom: 0;
   	background-color: rgba(0,0,0,0.5); 
   	z-index: 2; 
+	opacity: 1;
+	transition: opacity 0.15s ease-out;
+}
+
+.overlayOFF{
+	opacity: 0;
+	height: 0;
+	z-index: -1;
 }
 
 .flowerDetails{
@@ -384,7 +392,11 @@ h5{
   	text-align: center;
 }
 
-img.close{
+.flowerDetailsHide{
+	display: none; 
+}
+
+img.closeImage{
 	position: absolute; 
 	top: 30px;
   	right: 30px;
@@ -392,7 +404,7 @@ img.close{
 }
 
 
-/*flower details*/
+/* flower details */
 .flowerDetails h2{
 	margin: 0px 0px 0px 20px;
 }
@@ -416,7 +428,7 @@ img.close{
 	width: 50px;
 }
 
-.flowerNum{
+.flowerNumIterator{
 	margin: auto;
 	background-color: #EFFFFA;
 	width: 50%;
@@ -429,7 +441,7 @@ img.close{
 	align-items: center;
 }
 
-.flowerNum p{
+.flowerNumIterator p{
 	color: #1B2C4A;
 	font-size: 36px;
 	font-weight: bold;
@@ -449,6 +461,10 @@ img.close{
   	z-index: 4; 
   	text-align: right;
   	padding: 2%;
+}
+
+.commentDetailsHide{
+  	display: none;
 }
 
 .commentDetails h1{
@@ -498,6 +514,7 @@ textarea{
 	color: #EFFFFA;
 	font-family: 'Lato', sans-serif;
 	font-size: 20px;
+	resize: none;
 }
 
 .commentDetails button{

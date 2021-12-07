@@ -47,3 +47,44 @@ function addFlower(pkgId, flowerNum) {
 		})
 	}).catch(e => console.log(e))
 }
+
+
+function expandFlower(overlay, index){
+	var flowerDetails = document.getElementById(`flowerDetails${index}`);
+	// var close = document.getElementById('flowerCloseNum${index}');
+
+	flowerDetails.classList.remove("flowerDetailsHide")
+	flowerDetails.classList.add("flowerDetails")
+	overlay.classList.add("overlay")
+	overlay.classList.remove("overlayOFF")
+}
+
+function hideFlower(overlay, index){
+	var flowerDetails = document.getElementById(`flowerDetails${index}`);
+	// var close = document.getElementById('flowerCloseNum${index}');
+
+	flowerDetails.classList.remove("flowerDetails")
+	flowerDetails.classList.add("flowerDetailsHide")
+	overlay.classList.add("overlayOFF")
+	overlay.classList.remove("overlay")
+}
+
+function expandComment(overlay, index){
+	var flowerDetails = document.getElementById(`commentDetails${index}`);
+	// var close = document.getElementById('flowerCloseNum${index}');
+
+	flowerDetails.classList.add("commentDetails")
+	flowerDetails.classList.remove("commentDetailsHide")
+	overlay.classList.add("overlay")
+	overlay.classList.remove("overlayOFF")
+}
+
+function hideComment(overlay, index){
+	var flowerDetails = document.getElementById(`commentDetails${index}`);
+	// var close = document.getElementById('flowerCloseNum${index}');
+
+	flowerDetails.classList.remove("commentDetailss")
+	flowerDetails.classList.add("commentDetailsHide")
+	overlay.classList.add("overlayOFF")
+	overlay.classList.remove("overlay")
+}
