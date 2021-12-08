@@ -5,14 +5,14 @@ const containerChildren = compContainer.children
 const loadingEl = document.createElement('div')
 loadingEl.classList.add("lds-circle")
 loadingEl.insertAdjacentHTML('beforeend', '<div>R.i.B</div>')
-compContainer.appendChild(loadingEl)
 let companyDets
 let elements
 
-const compiledCompDets = async () => {
+const compiledCompDets = async (stateName) => {
+    let encodedName = stateName.split(" ").join("%20")
     let companyDetails = []
     try {
-        await fetch(fetchURL + 'RestInDatabase/courtState/New%20York', { 
+        await fetch(fetchURL + `RestInDatabase/courtState/${encodedName}`, { 
             method: "GET" 
         }).then(res => 
             res.json()
@@ -394,19 +394,32 @@ const insertElements = (eles, container) => {
     loadingEl.classList.add("hidden")
     compContainer.addEventListener("transitionend", () => {
         container.appendChild(docfrag)
-        compContainer.removeChild(loadingEl)
+        compContainer.removeChild(compContainer.firstElementChild)
     })
     compContainer.removeEventListener("transitionend", () => {
         container.appendChild(docfrag)
-        compContainer.removeChild(loadingEl)
+        compContainer.removeChild(compContainer.firstElementChild)
     })
+}
+
+const clearElements = (container) => {
+    while(container.firstChild) {
+        container.removeChild(container.lastChild)
+    }
+}
+
+const runState = async (stateName) => {
+    clearElements(compContainer)
+    compContainer.appendChild(loadingEl)
+    loadingEl.classList.remove("hidden")
+    companyDets = await compiledCompDets(stateName)
+    elements = addData(companyDets)
+    insertElements(elements, compContainer)
 }
 
 const run =  {
     run: async () => {
-        companyDets = await compiledCompDets()
-        elements = addData(companyDets)
-        insertElements(elements, compContainer)
+        runState("New York")
     },
     sortPop: () => {
         let sorted = companyDets.sort((a,b) => {
@@ -498,5 +511,12 @@ const sortHandler = () => {
         case "size":
             run.sortSize()
             break
+        case "clear":
+            clearElements(compContainer)
     }
+}
+
+const stateHandler = () => {
+    let stateSelector = document.getElementById("stateSelect")
+    runState(stateSelector.value)
 }
