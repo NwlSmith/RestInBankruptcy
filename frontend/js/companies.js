@@ -395,11 +395,7 @@ const insertElements = (eles, container) => {
     compContainer.addEventListener("transitionend", () => {
         container.appendChild(docfrag)
         compContainer.removeChild(compContainer.firstElementChild)
-    })
-    compContainer.removeEventListener("transitionend", () => {
-        container.appendChild(docfrag)
-        compContainer.removeChild(compContainer.firstElementChild)
-    })
+    }, {once: true})
 }
 
 const clearElements = (container) => {
@@ -511,8 +507,6 @@ const sortHandler = () => {
         case "size":
             run.sortSize()
             break
-        case "clear":
-            clearElements(compContainer)
     }
 }
 
