@@ -37,6 +37,7 @@
 		</header>
     <div style="margin-top: 50px;">
       <div id="unity-container" class="unity-desktop">
+        <div id="unity-fullscreen-button"></div>
         <canvas id="unity-canvas" ></canvas>
         <div id="unity-loading-bar">
           <div id="unity-logo"></div>
@@ -49,7 +50,7 @@
         </div>
         </div>
       </div>
-      <div id="unity-footer">
+      <!-- <div id="unity-footer">
         <div class = left>
           <div id="unity-webgl-logo"></div>
         </div>
@@ -57,8 +58,13 @@
           <div id="unity-build-title"><p>RestInBankruptcy-Unity</p></div>
           <div id="unity-fullscreen-button"></div>
         </div>
-      </div>
+      </div> -->
     </div>
+    <div id="game-controls">
+    <h2>Game Control Guide</h2>
+    <p>- Use mouse or trackpad to navigate your view. <br>
+    - Use the directional keys on your keyboard to walk around.<br>
+    - Move close to a gravestone & click to view details and interact.</p>
     
     <!--<script src="Build/11.18.loader.js"></script>-->
     <script>
@@ -98,8 +104,8 @@
           mobileWarning.style.display = "none";
         }, 5000);
       } else {
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
       }
       loadingBar.style.display = "block";
 
