@@ -420,6 +420,7 @@ img.closeImage{
 	top: 30px;
   	right: 30px;
   	width: 30px;
+  	cursor: pointer;
 }
 
 
@@ -464,6 +465,7 @@ img.closeImage{
 	color: #1B2C4A;
 	font-size: 36px;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 

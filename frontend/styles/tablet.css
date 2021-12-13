@@ -72,10 +72,10 @@ h5{
 }
 
 .flowerDetails {
-    top: 33%;
+    top: 27%;
     left: 15%;
     width: 70%;
-    height: 34%;
+    height: 46%;
 }
 
 .flowerRecieved img {
@@ -95,10 +95,10 @@ img.closeImage {
 }
 
 .commentDetails {
-    top: 25%;
+    top: 15%;
     left: 15%;
     width: 70%;
-    height: 50%;
+    height: 70%;
 }
 
 .commentDetails h1 {
