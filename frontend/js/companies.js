@@ -154,7 +154,7 @@ const addData = (companies) => {
         content2.classList.add("content")
 
         let content2P = document.createElement('p')
-        content2P.textContent = `${companyData[1].revenue_range}`
+        content2P.textContent = `${companyData[1].revenue_range ? companyData[1].revenue_range : "Revenue information not currently available."}`
         
         details.appendChild(info2)
         info2.appendChild(category2)
@@ -175,7 +175,7 @@ const addData = (companies) => {
         content3.classList.add("content")
 
         let content3P = document.createElement('p')
-        content3P.textContent = `${companyData[1].employees_range}`
+        content3P.textContent = `${companyData[1].employees_range ? companyData[1].employees_range  : "Employee information not currently available."}`
         
         details.appendChild(info3)
         info3.appendChild(category3)
@@ -458,9 +458,9 @@ const run =  {
             let aRange = a[1].employees_range
             let bRange = b[1].employees_range
 
-            if(aRange && !bRange) {
+            if(aRange && (bRange = "Employee information not currently available.")) {
                 return -1
-            } else if(!aRange && bRange) {
+            } else if((aRange = "Employee information not currently available.") && bRange) {
                 return 1
             } else if(!aRange && !bRange) {
                 return 0
